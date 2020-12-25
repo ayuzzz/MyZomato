@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restaurantsquerycommand", "restaurantsquerycommand.csproj", "{CF1D5FC6-2361-4ACF-9851-01C254BE1CB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF1D5FC6-2361-4ACF-9851-01C254BE1CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF1D5FC6-2361-4ACF-9851-01C254BE1CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF1D5FC6-2361-4ACF-9851-01C254BE1CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF1D5FC6-2361-4ACF-9851-01C254BE1CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0FEED26-9978-4404-B689-BF8DEA970F05}
+	EndGlobalSection
+EndGlobal
