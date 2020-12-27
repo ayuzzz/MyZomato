@@ -20,6 +20,7 @@ namespace restaurantsquerycommand.Controllers
         }
 
         [HttpGet]
+        [Route("restaurants")]
         public async Task<IActionResult> GetAllRestaurantsForCityAsync(int cityId)
         {
             if (cityId < 0)

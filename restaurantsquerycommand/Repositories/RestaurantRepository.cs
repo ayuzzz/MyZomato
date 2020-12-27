@@ -10,7 +10,7 @@ namespace restaurantsquerycommand.Repositories
 {
     public class RestaurantRepository : IRestaurantRepository
     {
-        private ISqlRepository _sqlRepository;
+        private readonly ISqlRepository _sqlRepository;
 
         public RestaurantRepository(ISqlRepository sqlRepository)
         {

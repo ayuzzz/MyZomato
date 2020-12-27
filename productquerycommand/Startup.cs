@@ -1,17 +1,15 @@
 using CommonUtilities;
-using CommonUtilities.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using restaurantsquerycommand.Repositories;
-using restaurantsquerycommand.Repositories.Abstractions;
-using restaurantsquerycommand.Services;
-using restaurantsquerycommand.Services.Abstractions;
-using System;
+using productquerycommand.Repositories;
+using productquerycommand.Repositories.Abstractions;
+using productquerycommand.Services;
+using productquerycommand.Services.Abstractions;
 
-namespace restaurantsquerycommand
+namespace productquerycommand
 {
     public class Startup
     {
@@ -26,17 +24,16 @@ namespace restaurantsquerycommand
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCommonUtilitiesLibrary();
+            services.AddSingleton<IProductService, ProductService>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddControllers();
-            services.AddSingleton<IRestaurantService, RestaurantService>();
-            services.AddSingleton<IRestaurantRepository, RestaurantRepository>();
-            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
                     Title = "MyZomato",
-                    Description = "MyZomato Api's"  
+                    Description = "MyZomato Api's"
                 });
             });
         }
@@ -54,6 +51,7 @@ namespace restaurantsquerycommand
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyZomato");
             });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
