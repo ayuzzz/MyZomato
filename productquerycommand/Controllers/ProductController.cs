@@ -20,7 +20,7 @@ namespace productquerycommand.Controllers
         }
 
         [HttpGet]
-        [Route("products-for-restaurants")]
+        [Route("products")]
         public async Task<IActionResult> GetAllProductsForRestaurant(int categoryId)
         {
             if (categoryId < 0)
