@@ -1,0 +1,22 @@
+form{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.searchbar{
+    margin: 0 auto;
+    width: 70%;
+}
+
+.location{
+    width: 30%;
+    display: inline;
+}
+
+.searchbar-div{
+    width:60%;
+    margin: auto;
+}
