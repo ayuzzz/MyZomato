@@ -5,7 +5,8 @@
             <input matInput type="search" placeholder="Restaurant or Food Item"
             [formControl]="restaurantFormControl" [matAutocomplete]="autocomplete" (keyup)="changeFilteredList()" />
             <mat-autocomplete #autocomplete = "matAutocomplete">
-                <mat-option *ngFor="let option of filteredList;" [value] = "option.name">{{option.name}}</mat-option>
+                <mat-option *ngFor="let option of filteredList;" [value] = "option.name"><span>{{option.rating}} <mat-icon matSuffix>grade</mat-icon></span>
+                   &nbsp; {{option.name}} - {{option.address}}</mat-option>
                 <mat-option *ngIf="this.filteredList.length == 0">Nothing found</mat-option>
             </mat-autocomplete>
             <mat-icon matSuffix>search</mat-icon>            
