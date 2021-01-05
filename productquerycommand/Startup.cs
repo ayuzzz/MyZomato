@@ -27,6 +27,12 @@ namespace productquerycommand
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddControllers();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -57,7 +63,7 @@ namespace productquerycommand
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors("MyPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -29,7 +29,9 @@ namespace restaurantsquerycommand
             services.AddControllers();
             services.AddSingleton<IRestaurantService, RestaurantService>();
             services.AddSingleton<IRestaurantRepository, RestaurantRepository>();
-            
+            services.AddSingleton<ILocationService, LocationService>();
+            services.AddSingleton<ILocationRepository, LocationRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -39,6 +41,13 @@ namespace restaurantsquerycommand
                     Description = "MyZomato Api's"  
                 });
             });
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,11 +68,14 @@ namespace restaurantsquerycommand
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

@@ -9,5 +9,8 @@ namespace restaurantsquerycommand.Repositories
     {
         internal const string GetAllRestaurants = @"select Id ,CityId ,Name ,Address ,Rating ,Owner ,OpeningHour ,ClosingHour ,ContactNumber
                                                     from Restaurants";
+
+        internal const string GetCityDetails = @"select Id, Name, State, Country from
+                                                 City";
     }
 }
