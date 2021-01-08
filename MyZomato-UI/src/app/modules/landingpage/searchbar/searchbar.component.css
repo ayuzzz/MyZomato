@@ -8,15 +8,23 @@ form{
 
 .searchbar{
     margin: 0 auto;
-    width: 70%;
+    width: 60%;
 }
 
 .location{
-    width: 30%;
+    width: 40%;
     display: inline;
+}
+
+.search-button{
+    margin : 0 auto;
+    width: 85%;
+    display: block;
 }
 
 .searchbar-div{
     width:60%;
     margin: auto;
+    display: block;
+    text-align: center;
 }

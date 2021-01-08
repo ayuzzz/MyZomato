@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IRestaurant } from 'src/app/core/models/restaurant';
 import { RestaurantsApiService } from 'src/app/core/services/api-services/restaurants-api.service';
-import {map, startWith} from 'rxjs/operators'
-import { RestaurantsApiUri } from 'src/app/core/uri/restaurants-api-uri';
 import { IpService } from 'src/app/core/services/api-services/ip-service.service';
 import { ICity } from 'src/app/core/models/city';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-searchbar',
@@ -26,7 +25,8 @@ export class SearchbarComponent implements OnInit {
   city:string;
   defaultCity:number;
 
-  constructor(private _httpHelper:RestaurantsApiService, private _ipService:IpService) {
+  constructor(private _httpHelper:RestaurantsApiService, private _ipService:IpService, private router:Router) {
+    // this.router = new Router();
     this.allRestaurants = [],
     this.filteredList = [];
     this.allCities = [];
@@ -89,8 +89,7 @@ export class SearchbarComponent implements OnInit {
     this.isRestaurantDisabled = false;
     this.restaurantFormControl.enable();
     this.getAllRestaurants(parseInt(this.cityFormControl.value));
-    this.changeFilteredList();
-    
+    this.changeFilteredList();    
   }
 
   changeFilteredList(){
@@ -101,5 +100,19 @@ export class SearchbarComponent implements OnInit {
     const input = value.toLowerCase();
     return this.allRestaurants.filter(restaurant => restaurant.name.toLowerCase().indexOf(input) === 0 
                                       && restaurant.cityId == this.cityFormControl.value);
+  }
+
+  search(){
+    console.log(this.router.url);
+      if(this.restaurantFormControl.value != null && this.restaurantFormControl.value != '')
+      {
+          this.router.navigate(['/products/', this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id]);
+          console.log("Url : " + "/products/" + this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id);
+      }
+      else
+      {
+          this.router.navigate(['/restaurants/restaurants-in-city/', this.cityFormControl.value]);
+          console.log("Url : " + "/restaurants/restaurants-in-city/" + this.cityFormControl.value);
+      }
   }
 }
