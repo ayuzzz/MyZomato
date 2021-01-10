@@ -7,5 +7,6 @@ export interface IRestaurant{
     owner:string,
     openingHour:number,
     closingHour:number,
-    contactNumber:string
+    contactNumber:string,
+    cuisine:string
 }

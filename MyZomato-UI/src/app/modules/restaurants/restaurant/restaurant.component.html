@@ -1,1 +1,10 @@
-<p>restaurant works!</p>
+<mat-card class="restaurant mat-elevation-z0">
+    <img mat-card-md-image class="restaurant-image" src="https://c.ndtvimg.com/2020-08/gl1sqn7_restaurant_625x300_12_August_20.jpg"/>
+    <mat-card-header>
+        <mat-card-title>{{this._restaurant.name}}</mat-card-title>
+        <mat-card-subtitle><span *ngFor="let index of [].constructor(this._restaurant.rating)"><mat-icon matSuffix class="yellow-icon">grade</mat-icon></span></mat-card-subtitle>
+        <mat-card-subtitle>{{this._restaurant.cuisine}}</mat-card-subtitle>
+        <mat-card-subtitle>{{this._restaurant.address}}</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+<mat-divider></mat-divider>

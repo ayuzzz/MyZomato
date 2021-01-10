@@ -1,0 +1,26 @@
+.restaurant{
+    display: inline-flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0% 2%;
+}
+
+.restaurant mat-card-title{
+    color: chocolate;
+}
+
+.yellow-icon{
+    color:forestgreen;
+}
+
+mat-divider{
+    width:85%;
+    margin: 0 2%;
+}
+
+mat-card-header{
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}

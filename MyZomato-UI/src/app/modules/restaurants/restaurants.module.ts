@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+
 import { RestaurantsAppRoutingModule } from './restaurants-app-routing.module';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
@@ -10,7 +15,10 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
   declarations: [RestaurantsListComponent, RestaurantComponent],
   imports: [
     CommonModule,
-    RestaurantsAppRoutingModule
+    RestaurantsAppRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule
   ]
 })
 export class RestaurantsModule { }
