@@ -13,5 +13,6 @@ namespace CommonModels
         public string Category { get; set; }
         public int SubcategoryId { get; set; }
         public string Subcategory { get; set; }
+        public int RestaurantId { get; set; }
     }
 }

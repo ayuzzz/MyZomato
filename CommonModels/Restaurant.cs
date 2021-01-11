@@ -10,6 +10,7 @@ namespace CommonModels
         public string Address { get; set; }
         public int? Rating { get; set; }
         public string Owner { get; set; }
+        public string Cuisine { get; set; }
         public int? OpeningHour { get; set; }
         public int? ClosingHour { get; set; }
         public string ContactNumber { get; set; }

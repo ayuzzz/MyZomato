@@ -16,17 +16,17 @@ namespace productquerycommand.Services
             _productRepository = productRepository;
         }
 
-        public async Task<List<Product>> GetAllProductsForCategoryAsync(int categoryId)
+        public async Task<List<Product>> GetAllProductsForRestaurantyAsync(int restaurantId = 0)
         {
             List<Product> allProducts = await _productRepository.GetAllProductsAsync();
             
-            if(categoryId == 0)
+            if(restaurantId == 0)
             {
                 return allProducts.ToList();
             }
             else
             {
-                return allProducts.Where(product => product.CategoryId == categoryId).ToList();
+                return allProducts.Where(product => product.RestaurantId == restaurantId).ToList();
             }
         }
     }

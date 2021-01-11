@@ -20,14 +20,14 @@ namespace productquerycommand.Controllers
         }
 
         [HttpGet]
-        [Route("products")]
-        public async Task<IActionResult> GetAllProductsForRestaurant(int categoryId)
+        [Route("products-for-restaurant")]
+        public async Task<IActionResult> GetAllProductsForRestaurant(int restaurantId)
         {
-            if (categoryId < 0)
-                return BadRequest("Invalid Category Id");
+            if (restaurantId < 0)
+                return BadRequest("Invalid restaurant Id");
             else
             {
-                return Ok(await _productService.GetAllProductsForCategoryAsync(categoryId));
+                return Ok(await _productService.GetAllProductsForRestaurantyAsync(restaurantId));
             }
         }
     }
