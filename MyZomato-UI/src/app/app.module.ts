@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IpService } from './core/services/api-services/ip-service.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ProductsAppRoutingModule } from './modules/products/products-app-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ProductsAppRoutingModule
     ],
   providers: [RestaurantsApiService, IpService],
   bootstrap: [AppComponent]

@@ -1,0 +1,10 @@
+<mat-card class="product mat-elevation-z0">
+    <img mat-card-md-image class="product-image" src="https://spiderimg.amarujala.com/assets/images/2019/10/07/750x506/gg_1570445558.png"/>
+    <mat-card-header>
+        <mat-card-title>{{this._product.productName}}</mat-card-title>
+        <!-- <mat-card-subtitle><span *ngFor="let index of [].constructor(this._restaurant.rating)"><mat-icon matSuffix class="yellow-icon">grade</mat-icon></span></mat-card-subtitle> -->
+        <mat-card-subtitle>{{this._product.subcategory}}</mat-card-subtitle>
+        <mat-card-subtitle>{{this._product.price}}</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+<mat-divider></mat-divider>
