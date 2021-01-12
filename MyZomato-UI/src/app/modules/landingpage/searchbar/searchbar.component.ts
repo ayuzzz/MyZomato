@@ -26,7 +26,6 @@ export class SearchbarComponent implements OnInit {
   defaultCity:number;
 
   constructor(private _httpHelper:RestaurantsApiService, private _ipService:IpService, private router:Router) {
-    // this.router = new Router();
     this.allRestaurants = [],
     this.filteredList = [];
     this.allCities = [];
@@ -106,13 +105,12 @@ export class SearchbarComponent implements OnInit {
     console.log(this.router.url);
       if(this.restaurantFormControl.value != null && this.restaurantFormControl.value != '')
       {
-          this.router.navigate(['/products/', this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id]);
-          console.log("Url : " + "/products/" + this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id);
+          // this.router.navigate(['/products/', this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id]);
+          // console.log("Url : " + "/products/" + this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id);
       }
       else
       {
           this.router.navigate(['/restaurants/restaurants-in-city/', this.cityFormControl.value]);
-          console.log("Url : " + "/restaurants/restaurants-in-city/" + this.cityFormControl.value);
       }
   }
 }

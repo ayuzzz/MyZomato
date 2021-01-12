@@ -4,7 +4,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 
 
 const routes: Routes = [
-  {path:'', component:SearchbarComponent}
+  {path:'', component:SearchbarComponent, pathMatch:"full"}
 
 ];
 

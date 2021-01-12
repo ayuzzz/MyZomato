@@ -6,7 +6,7 @@ const routes: Routes = [
   {path:'landingpage', loadChildren: () => import ('./modules/landingpage/landingpage.module').then((module) => module.LandingpageModule)},
   {path:'restaurants', loadChildren:() => import('./modules/restaurants/restaurants.module').then((module) => module.RestaurantsModule)},
   {path:'products', loadChildren:() => import('./modules/products/products.module').then((module) => module.ProductsModule)},
-  {path:'**', pathMatch : 'full', redirectTo:'landingpage'}
+  {path:'', pathMatch : 'full', redirectTo:'landingpage'}
 ];
 
 @NgModule({
