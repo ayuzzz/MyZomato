@@ -26,5 +26,17 @@ namespace restaurantsquerycommand.Controllers
                 return Ok(await _restaurantService.GetRestaurantsForCity(cityId));
             }
         }
+
+        [HttpGet]
+        [Route("restaurant-details")]
+        public async Task<IActionResult> GetRestaurantDetails(int restaurantId)
+        {
+            if (restaurantId < 0)
+                return BadRequest("Invalid restaurant Id");
+            else
+            {
+                return Ok(await _restaurantService.GetRestaurantDetailsAsync(restaurantId));
+            }
+        }
     }
 }

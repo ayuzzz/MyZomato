@@ -32,16 +32,47 @@ namespace CommonUtilities
             return new SqlConnection(_connectionstring);
         }
 
-        public Task<IEnumerable<T>> ExecuteAsync<T>(string query = null, DynamicParameters parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
+        public Task<IEnumerable<T>> ExecuteAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(string query = null, DynamicParameters parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
+        public async Task<IEnumerable<T>> QueryAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
         {
             using (IDbConnection db = GetDbConnection())
             {
-                return await db.QueryAsync<T>(sql : query, param: parameters, commandType : commandType, commandTimeout : commandTimeOut);
+                return await db.QueryAsync<T>(sql : query, param: (Object)parameters, commandType : commandType, commandTimeout : commandTimeOut);
+            }
+        }
+
+        public async Task<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> QueryMultipleAsync<TFirst, TSecond>
+            (string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
+        {
+            using (IDbConnection db = GetDbConnection())
+            {
+                using (var reader = await db.QueryMultipleAsync(query, (Object)parameters))
+                {
+                    var tFirst = reader.Read<TFirst>();
+                    var tSecond = reader.Read<TSecond>();
+
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(tFirst, tSecond);
+                }
+            }
+        }
+
+        public async Task<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>, IEnumerable<TThird>>> QueryMultipleAsync<TFirst, TSecond, TThird>
+            (string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
+        {
+            using (IDbConnection db = GetDbConnection())
+            {
+                using (var reader = await db.QueryMultipleAsync(query, (Object)parameters))
+                {
+                    var tFirst = reader.Read<TFirst>();
+                    var tSecond = reader.Read<TSecond>();
+                    var tThird = reader.Read<TThird>();
+
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>, IEnumerable<TThird>>(tFirst, tSecond, tThird);
+                }
             }
         }
     }
