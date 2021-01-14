@@ -7,5 +7,6 @@ export interface IProduct{
     subcategoryId:number,
     subcategory:string,
     isVegetarian:boolean,
-    restaurantId:number
+    restaurantId:number,
+    quantity:number
 }

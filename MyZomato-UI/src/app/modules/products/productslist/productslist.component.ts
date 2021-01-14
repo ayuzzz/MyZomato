@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from 'src/app/core/models/IProduct';
+import { IProduct } from 'src/app/core/models/product';
 import { ProductsApiService } from 'src/app/core/services/api-services/products-api.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { ProductsApiService } from 'src/app/core/services/api-services/products-
 })
 export class ProductslistComponent implements OnInit {
 
-  responseList:IProduct[];
+  productsList:IProduct[];
+  productsInCart:IProduct[];
 
   constructor(private _router:ActivatedRoute, private _productApiService:ProductsApiService) { 
-    this.responseList = [];
+    this.productsList = [];
+    this.productsInCart = [];
   }
 
 
@@ -25,8 +27,41 @@ export class ProductslistComponent implements OnInit {
 
   getProductsForRestaurant(restaurantId:number){
     this._productApiService.getProductsForRestaurant(restaurantId).subscribe(
-      (response) => this.responseList = response);
+      (response) => this.productsList = response);
 
   }   
 
+  updateCart(product:IProduct){
+    this.productsInCart = JSON.parse(localStorage.getItem("productsInCart") as string) as IProduct[];
+    
+    if(this.productsInCart == null)
+    {
+      this.productsInCart = [];
+      this.productsInCart.push(product);
+    }
+    else    
+    {
+      let productPresent = this.productsInCart.filter(x => x.id === product.id).length;
+
+      if(productPresent === 0)
+      {
+        this.productsInCart.push(product);
+      }
+      else
+      {
+        let addedProduct = this.productsInCart.findIndex(x => x.id === product.id);
+        if(addedProduct != -1)
+        {
+          this.productsInCart.splice(addedProduct, 1);
+        }
+
+        if(product.quantity > 0)
+        {
+          this.productsInCart.push(product);
+        }          
+      }
+    }
+
+    localStorage.setItem("productsInCart", JSON.stringify(this.productsInCart));
+  }
 }

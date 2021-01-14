@@ -5,6 +5,7 @@
         <!-- <mat-card-subtitle><span *ngFor="let index of [].constructor(this._restaurant.rating)"><mat-icon matSuffix class="yellow-icon">grade</mat-icon></span></mat-card-subtitle> -->
         <mat-card-subtitle>{{this._product.subcategory}}</mat-card-subtitle>
         <mat-card-subtitle>{{this._product.price}}</mat-card-subtitle>
-    </mat-card-header>
+    </mat-card-header>    
+    <app-quantity (quantityChanged)="productQuantityChanged($event)"></app-quantity>
 </mat-card>
 <mat-divider></mat-divider>

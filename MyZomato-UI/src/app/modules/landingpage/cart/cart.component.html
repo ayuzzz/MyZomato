@@ -1,0 +1,4 @@
+<button (click)="checkout()" class="cart-button" mat-icon-button aria-label="Shopping Cart">
+    <mat-icon>shopping_cart</mat-icon>
+    <span [matBadge]="this.productsInCartCount" matBadgeOverlap="true"></span>    
+</button>

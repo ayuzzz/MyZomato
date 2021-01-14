@@ -14,10 +14,13 @@ import { IpService } from './core/services/api-services/ip-service.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductsAppRoutingModule } from './modules/products/products-app-routing.module';
+import { CartComponent } from './modules/landingpage/cart/cart.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { ProductsAppRoutingModule } from './modules/products/products-app-routin
     MatIconModule,
     MatListModule,
     MatToolbarModule,
-    ProductsAppRoutingModule
+    ProductsAppRoutingModule,
+    MatBadgeModule
     ],
   providers: [RestaurantsApiService, IpService],
   bootstrap: [AppComponent]

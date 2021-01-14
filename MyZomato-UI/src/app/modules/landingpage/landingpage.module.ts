@@ -8,13 +8,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { LandingPageRoutingModule } from './landingpage-routing.module';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
-  declarations: [SearchbarComponent],
+  declarations: [SearchbarComponent, CheckoutComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -25,7 +27,8 @@ import { LandingPageRoutingModule } from './landingpage-routing.module';
     MatIconModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
   providers:[]
 })

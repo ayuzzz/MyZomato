@@ -20,3 +20,7 @@ mat-card-header{
     justify-content: center;
     height: 100%;
 }
+
+app-quantity{
+    width: 100%;
+}
