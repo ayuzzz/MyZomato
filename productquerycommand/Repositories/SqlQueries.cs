@@ -7,7 +7,7 @@ namespace productquerycommand.Repositories
 {
     public static class SqlQueries
     {
-        internal const string GetAllProducts = @"select p.Id as ProductId, p.ProductName, p.Price,
+        internal const string GetAllProducts = @"select p.Id, p.ProductName, p.Price,
                                                 c.Id as CategoryId, c.Name as Category, sc.Id as SubcategoryId, sc.Name as Subcategory, pr.RestaurantId
                                                 from ProductRestaurant pr inner join Product p on p.Id = pr.ProductId
                                                 inner join CategorySubcategoryMapping csm on csm.Id = p.CuisineId
