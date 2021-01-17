@@ -5,10 +5,6 @@
     margin: 0% 2%;
 }
 
-.restaurant mat-card-title{
-    color: chocolate;
-}
-
 .yellow-icon{
     color:forestgreen;
 }
@@ -23,4 +19,9 @@ mat-card-header{
     flex-direction: column;
     justify-content: center;
     height: 100%;
+}
+
+a{
+    color:chocolate;
+    text-decoration: none;
 }

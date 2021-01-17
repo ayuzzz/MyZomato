@@ -13,12 +13,14 @@ import {MatTableModule} from '@angular/material/table';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { LandingPageRoutingModule } from './landingpage-routing.module';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { DialogsModule } from '../dialogs/dialogs.module';
 
 
 @NgModule({
   declarations: [SearchbarComponent, CheckoutComponent],
   imports: [
     CommonModule,
+    DialogsModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

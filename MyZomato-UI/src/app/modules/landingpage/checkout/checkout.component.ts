@@ -23,4 +23,8 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getTotalCost():number{
+    return this.checkoutContents.map(item => item.price * item.quantity).reduce((prev, curr) => prev + curr, 0);
+  }
+
 }
