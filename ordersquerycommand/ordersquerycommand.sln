@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ordersquerycommand", "ordersquerycommand.csproj", "{CA82D929-2C0F-4C95-82D5-CBBDAF80C91E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA82D929-2C0F-4C95-82D5-CBBDAF80C91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA82D929-2C0F-4C95-82D5-CBBDAF80C91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA82D929-2C0F-4C95-82D5-CBBDAF80C91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA82D929-2C0F-4C95-82D5-CBBDAF80C91E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A9C704E-0286-44FE-8B2D-E433E71585A0}
+	EndGlobalSection
+EndGlobal
