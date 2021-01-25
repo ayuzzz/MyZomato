@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CommonModels.Queues;
+using CommonUtilities;
+using GreenPipes;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using ordersquerycommand.Application.EventHandlers;
 
 namespace ordersquerycommand
 {
@@ -25,6 +23,29 @@ namespace ordersquerycommand
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCommonUtilitiesLibrary()
+                    .AddServiceBusConfiguraion(Configuration);
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<OrderCreatedEventHandler>();
+
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.Host($"rabbitmq://{Configuration["ServiceBus:Hostname"]}");
+
+                    cfg.ReceiveEndpoint(EventQueues.EventQueuePairs["OrderCreatedEvent"], ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+
+                        ep.ConfigureConsumer<OrderCreatedEventHandler>(provider);
+                    });
+                }));
+            });
+
+            services.AddMassTransitHostedService();
+
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

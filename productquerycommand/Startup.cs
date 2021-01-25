@@ -1,13 +1,18 @@
 using CommonUtilities;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using productquerycommand.Application.ServiceBus;
+using productquerycommand.Application.ServiceBus.Abstractions;
 using productquerycommand.Repositories;
 using productquerycommand.Repositories.Abstractions;
 using productquerycommand.Services;
 using productquerycommand.Services.Abstractions;
+using System;
+using System.Threading;
 
 namespace productquerycommand
 {
@@ -24,8 +29,22 @@ namespace productquerycommand
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCommonUtilitiesLibrary();
+            services.AddServiceBusConfiguraion(Configuration);
+
+            services.AddMassTransit(x =>
+            {
+
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.Host($"rabbitmq://{Configuration["ServiceBus:Hostname"]}");
+                }));
+            });
+
+            services.AddMassTransitHostedService();
+
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IOrderCreatedService, OrderCreatedEventService>();
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

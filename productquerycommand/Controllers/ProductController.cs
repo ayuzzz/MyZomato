@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using CommonModels.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using productquerycommand.Application.ServiceBus.Abstractions;
 using productquerycommand.Services.Abstractions;
 
 namespace productquerycommand.Controllers
@@ -13,10 +14,14 @@ namespace productquerycommand.Controllers
     public class ProductController : ControllerBase
     {
         private IProductService _productService;
+        private readonly IBusControl _bus;
+        private readonly IOrderCreatedService _orderCreatedService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IBusControl bus, IOrderCreatedService orderCreatedService)
         {
             _productService = productService;
+            _bus = bus;
+            _orderCreatedService = orderCreatedService;
         }
 
         [HttpGet]
@@ -29,6 +34,28 @@ namespace productquerycommand.Controllers
             {
                 return Ok(await _productService.GetAllProductsForRestaurantyAsync(restaurantId));
             }
+        }
+
+        [HttpGet]
+        [Route("sample")]
+        public async Task<IActionResult> SampleApi()
+        {
+            try
+            {
+                //var endpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/order-created"));
+                //await endpoint.Send<OrderCreatedEvent>(new 
+                //{
+                //    Id = Guid.NewGuid()
+                //});
+                await _orderCreatedService.PublishThroughEventBus(new OrderCreatedEvent { Id = Guid.NewGuid() });
+
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            return Ok();
         }
     }
 }
