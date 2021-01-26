@@ -26,7 +26,7 @@ namespace productquerycommand.Application.ServiceBus
 
         public async Task PublishThroughEventBus(OrderCreatedEvent @event)
         {
-            var queueEndpoint = await _eventService.PublishThroughEventBusAsync(@event);
+            var queueEndpoint = await _eventService.GetEndpointForEventBusAsync(@event);
             await queueEndpoint.Send<OrderCreatedEvent>(@event);
         }
     }

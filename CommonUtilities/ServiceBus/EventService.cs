@@ -28,5 +28,11 @@ namespace CommonUtilities.ServiceBus
             var queueEndpoint = await _bus.GetSendEndpoint(new Uri(await _servicebusConnectionFactory.GetServicebusEndpointUrl(@event)));
             return queueEndpoint;
         }
+
+        public async Task<ISendEndpoint> GetEndpointForEventBusAsync(IntegrationEvent @event)
+        {
+            var queueEndpoint = await _bus.GetSendEndpoint(new Uri(await _servicebusConnectionFactory.GetServicebusEndpointUrl(@event)));
+            return queueEndpoint;
+        }
     }
 }

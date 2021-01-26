@@ -10,5 +10,6 @@ namespace CommonUtilities.ServiceBus.Abstractions
     public interface IEventService
     {
         Task<ISendEndpoint> PublishThroughEventBusAsync(IntegrationEvent @event);
+        Task<ISendEndpoint> GetEndpointForEventBusAsync(IntegrationEvent @event);
     }
 }
