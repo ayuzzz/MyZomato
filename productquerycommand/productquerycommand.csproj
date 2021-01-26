@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BaseInjectionUtilities\BaseInjectionUtilities.csproj" />
     <ProjectReference Include="..\CommonModels\CommonModels.csproj" />
     <ProjectReference Include="..\CommonUtilities\CommonUtilities.csproj" />
   </ItemGroup>

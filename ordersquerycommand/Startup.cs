@@ -1,19 +1,19 @@
-using CommonModels.Queues;
-using CommonUtilities;
-using GreenPipes;
-using MassTransit;
+using BaseInjectionUtilities;
+using CommonModels.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ordersquerycommand.Application.EventHandlers;
+using System;
+using System.Collections.Generic;
 
 namespace ordersquerycommand
 {
-    public class Startup
+    public class Startup:AppStartupBase
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration):base(configuration)
         {
             Configuration = configuration;
         }
@@ -22,46 +22,17 @@ namespace ordersquerycommand
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCommonUtilitiesLibrary()
-                    .AddServiceBusConfiguraion(Configuration);
+        {   
+            ConfigureApplicationServices(services, enableServiceBus: true);
 
-            services.AddMassTransit(x =>
-            {
-                x.AddConsumer<OrderCreatedEventHandler>();
-
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
-                {
-                    cfg.Host($"rabbitmq://{Configuration["ServiceBus:Hostname"]}");
-
-                    cfg.ReceiveEndpoint(EventQueues.EventQueuePairs["OrderCreatedEvent"], ep =>
+            services.AddSwaggerConfiguration("v1", "My Zomato", "Orders service Api's")
+                    .AddCorsPolicies("MyPolicy")
+                    .ConfigureMassTransitForRabbitMq(Configuration, registerHandlers: new Dictionary<Type, Type>
                     {
-                        ep.PrefetchCount = 16;
-                        ep.UseMessageRetry(r => r.Interval(2, 100));
-
-                        ep.ConfigureConsumer<OrderCreatedEventHandler>(provider);
+                        [typeof(OrderCreatedEventHandler)] = typeof(OrderCreatedEvent)
                     });
-                }));
-            });
 
-            services.AddMassTransitHostedService();
-
-            services.AddControllers();
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "MyZomato",
-                    Description = "MyZomato Api's"
-                });
-            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,22 +42,14 @@ namespace ordersquerycommand
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyZomato");
-            });
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.SwaggerExtension("/swagger/v1/swagger.json", "MyZomato")
+                .UseHttpsRedirection()
+                .UseRouting()
+                .CorsExtension("MyPolicy").UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });            
         }
     }
 }

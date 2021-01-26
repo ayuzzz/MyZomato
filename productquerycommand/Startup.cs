@@ -1,5 +1,4 @@
-using CommonUtilities;
-using MassTransit;
+using BaseInjectionUtilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,14 +10,12 @@ using productquerycommand.Repositories;
 using productquerycommand.Repositories.Abstractions;
 using productquerycommand.Services;
 using productquerycommand.Services.Abstractions;
-using System;
-using System.Threading;
 
 namespace productquerycommand
 {
-    public class Startup
+    public class Startup:AppStartupBase
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration):base(configuration)
         {
             Configuration = configuration;
         }
@@ -28,39 +25,15 @@ namespace productquerycommand
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCommonUtilitiesLibrary();
-            services.AddServiceBusConfiguraion(Configuration);
-
-            services.AddMassTransit(x =>
-            {
-
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
-                {
-                    cfg.Host($"rabbitmq://{Configuration["ServiceBus:Hostname"]}");
-                }));
-            });
-
-            services.AddMassTransitHostedService();
-
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<IOrderCreatedService, OrderCreatedEventService>();
-            services.AddControllers();
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "MyZomato",
-                    Description = "MyZomato Api's"
-                });
-            });
+
+            ConfigureApplicationServices(services, enableServiceBus: true);
+
+            services.AddSwaggerConfiguration("v1", "My Zomato", "Product service Api's")
+                    .AddCorsPolicies("MyPolicy")
+                    .ConfigureMassTransitForRabbitMq(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,22 +44,13 @@ namespace productquerycommand
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyZomato");
-            });
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseCors("MyPolicy");
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.SwaggerExtension("/swagger/v1/swagger.json", "MyZomato")
+                .UseHttpsRedirection()
+                .UseRouting()
+                .CorsExtension("MyPolicy").UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }
