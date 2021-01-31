@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CommonModels;
+using Microsoft.AspNetCore.Mvc;
+using orderscommand.Services.Abstractions;
+using System.Threading.Tasks;
 
 namespace orderscommand.Controllers
 {
@@ -11,6 +14,20 @@ namespace orderscommand.Controllers
         public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
+        }
+
+        [HttpPost]
+        [Route("create-order")]
+        public async Task<IActionResult> CreateOrder([FromBody] Order order)
+        {
+            if(order is null)
+            {
+                return BadRequest("Invalid order");
+            }
+            else
+            {
+                return Ok(await _orderService.CreateOrderAsync(order));
+            }
         }
     }
 }

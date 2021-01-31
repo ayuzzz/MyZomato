@@ -32,9 +32,12 @@ namespace CommonUtilities
             return new SqlConnection(_connectionstring);
         }
 
-        public Task<IEnumerable<T>> ExecuteAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
+        public async Task<int> ExecuteAsync(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)
         {
-            throw new NotImplementedException();
+            using (IDbConnection db = GetDbConnection())
+            {
+                return await db.ExecuteAsync(sql: query, param: (Object)parameters, commandType: commandType, commandTimeout: commandTimeOut);
+            }
         }
 
         public async Task<IEnumerable<T>> QueryAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60)

@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using orderscommand.Application.EventHandlers;
+using orderscommand.Repositories;
+using orderscommand.Repositories.Abstractions;
+using orderscommand.Services;
+using orderscommand.Services.Abstractions;
 using System;
 using System.Collections.Generic;
 
@@ -22,7 +26,10 @@ namespace orderscommand
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {   
+        {
+            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<IOrderService, OrderService>();
+
             ConfigureApplicationServices(services, enableServiceBus: true);
 
             services.AddSwaggerConfiguration("v1", "My Zomato", "Orders service Api's")

@@ -10,7 +10,7 @@ namespace CommonUtilities.Abstractions
     public interface ISqlRepository
     {
         DbConnection GetDbConnection();
-        Task<IEnumerable<T>> ExecuteAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60);
+        Task<int> ExecuteAsync(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60);
         Task<IEnumerable<T>> QueryAsync<T>(string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60);
         Task<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> QueryMultipleAsync<TFirst, TSecond>
             (string query = null, dynamic parameters = null, CommandType commandType = CommandType.Text, int commandTimeOut = 60);
