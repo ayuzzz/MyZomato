@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
+//import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -17,7 +17,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductsAppRoutingModule } from './modules/products/products-app-routing.module';
 import { CartComponent } from './modules/landingpage/cart/cart.component';
 import {MatBadgeModule} from '@angular/material/badge';
-import { UserAuthService } from './core/services/api-services/user-auth.service';
 
 @NgModule({
   declarations: [
@@ -35,41 +34,12 @@ import { UserAuthService } from './core/services/api-services/user-auth.service'
     MatListModule,
     MatToolbarModule,
     ProductsAppRoutingModule,
-    MatBadgeModule,
-    MsalModule.forRoot(
-    {
-      auth: {
-        clientId: 'Enter_the_Application_Id_here', // This is your client ID
-        //authority: `${Cloud_Instance_Id}/${Tenant_Info}`, // This is your tenant ID
-        authority: 'Cloud_Instance_Id}/{Tenant_Info}',
-        redirectUri: 'http://localhost:4200/'// This is your redirect URI
-      },
-      cache: {
-        cacheLocation: 'localStorage'
-      },
-    }, 
-    {
-      consentScopes: [
-        'user.read',
-        'openid',
-        'profile',
-      ],
-      unprotectedResources: [],
-      protectedResourceMap: [
-        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
-      ],
-      extraQueryParameters: {}
-    })
+    MatBadgeModule
   ],
   providers: [
     RestaurantsApiService,
-    IpService,
-    UserAuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true
-  }],
+    IpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
