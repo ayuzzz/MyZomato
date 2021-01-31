@@ -16,6 +16,7 @@ export class CategorySeperatorComponent implements OnInit {
   distinctCategories:string[];
   groupedProductsList:[];
   productsInCart:IProduct[];
+  restaurantId:number;
 
   constructor(private _router:ActivatedRoute, private _productApiService:ProductsApiService) { 
     this.productsList = [];
@@ -23,17 +24,18 @@ export class CategorySeperatorComponent implements OnInit {
     this.distinctCategories = [];
     this.groupedProductsList = [];
     this.category = "";
+    this.restaurantId = 0;
   }
 
 
   ngOnInit(): void { 
-    let restaurantId = parseInt(this._router.snapshot.paramMap.get("restaurantId") as string);
+    this.restaurantId = parseInt(this._router.snapshot.paramMap.get("restaurantId") as string);
 
-    this.getProductsForRestaurant(restaurantId);
+    this.getProductsForRestaurant(this.restaurantId);
   }
 
   getProductsForRestaurant(restaurantId:number){
-    this._productApiService.getProductsForRestaurant(restaurantId).subscribe(
+    this._productApiService.getProductsForRestaurant(this.restaurantId).subscribe(
       (response) => {this.productsList = response; this.populateCategories()});
   }   
 
@@ -52,9 +54,18 @@ export class CategorySeperatorComponent implements OnInit {
 
   updateCart(product:IProduct){
     this.productsInCart = JSON.parse(localStorage.getItem("productsInCart") as string) as IProduct[];
+    let cartRestaurantId = JSON.parse(localStorage.getItem("restaurantId") as string) as number;
     
-    if(this.productsInCart == null)
+    if(this.productsInCart == null && cartRestaurantId == null)
     {
+      this.productsInCart = [];
+      this.productsInCart.push(product);
+      localStorage.setItem("restaurantId", JSON.stringify(this.restaurantId));
+    }
+    else if(this.productsInCart != null && cartRestaurantId != this.restaurantId)
+    {
+      localStorage.removeItem("restaurantId");
+      localStorage.setItem("restaurantId", JSON.stringify(this.restaurantId));
       this.productsInCart = [];
       this.productsInCart.push(product);
     }
