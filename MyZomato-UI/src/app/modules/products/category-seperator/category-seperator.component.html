@@ -1,0 +1,7 @@
+<div class="category" *ngFor="let cat of this.distinctCategories;">
+    <h4>{{cat}}</h4>
+    <mat-divider></mat-divider>
+    <div class="product-list">
+        <app-product *ngFor="let product of this.getProducts(cat);" [_product]="product" (updateCartEvent)="updateCart($event)"></app-product>
+    </div>
+</div>

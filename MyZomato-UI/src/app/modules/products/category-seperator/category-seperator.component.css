@@ -1,0 +1,19 @@
+.category{
+    width: 100%;
+    margin:10px 0px;
+}
+
+h4{
+    text-align: center;
+    color: darkcyan;
+    font-weight: bold;
+}
+
+.product-list{
+    margin:10px 0px;
+}
+
+mat-divider{
+    width:85%;
+    margin: 0 2%;
+}

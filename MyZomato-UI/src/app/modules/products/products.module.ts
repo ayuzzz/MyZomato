@@ -8,11 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { QuantityComponent } from './quantity/quantity.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { CategorySeperatorComponent } from './category-seperator/category-seperator.component';
 
 
 
 @NgModule({
-  declarations: [ProductslistComponent, ProductComponent, QuantityComponent],
+  declarations: [ProductslistComponent, ProductComponent, QuantityComponent, CategorySeperatorComponent],
   imports: [
     CommonModule,
     MatCardModule,
