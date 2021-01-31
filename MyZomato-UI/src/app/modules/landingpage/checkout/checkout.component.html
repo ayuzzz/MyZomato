@@ -1,6 +1,9 @@
 
 <div class="table-container">
-    <div class="checkout">
+    <div *ngIf="this.checkoutContents.length <= 0" class="checkout" style="text-align: center;"> 
+        <h1>Cart is empty . . . </h1>
+    </div>
+    <div *ngIf="this.checkoutContents.length > 0" class="checkout">
         <table mat-table [dataSource]="this.checkoutContents" class="mat-elevation-z8">
             <ng-container matColumnDef="Item">
                 <th mat-header-cell *matHeaderCellDef> Item </th>

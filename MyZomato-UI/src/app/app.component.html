@@ -2,12 +2,12 @@
     <app-cart></app-cart>
 </div>
 <div class="page-container">
-    <mat-sidenav-container autosize>        
+    <mat-sidenav-container>        
         <mat-sidenav class="navbar" #sidemenu mode="push">
             <mat-nav-list>                
-                <a mat-list-item routerLink="/landingpage"><mat-icon>home</mat-icon>&nbsp;Home</a>
-                <a mat-list-item routerLink="/profile"><mat-icon>account_circle</mat-icon>&nbsp;Profile</a>
-                <a mat-list-item routerLink="/orders"><mat-icon>shopping_cart</mat-icon>&nbsp;My Orders</a>
+                <a mat-list-item routerLink="/landingpage"><mat-icon>home</mat-icon><div class="navlink-text">Home</div></a>
+                <a mat-list-item routerLink="/profile"><mat-icon>account_circle</mat-icon><div class="navlink-text">Profile</div></a>
+                <a mat-list-item routerLink="/orders"><mat-icon>shopping_cart</mat-icon><div class="navlink-text">My Orders</div></a>
             </mat-nav-list> 
         </mat-sidenav>   
         
