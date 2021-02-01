@@ -9,5 +9,7 @@ namespace orderscommand.Services.Abstractions
     public interface IOrderService
     {
         Task<bool> CreateOrderAsync(Order order);
+        Task<(Order, int)> GetOrderDetailsAsync(Guid transactionId);
+        Task<bool> UpdateOrderStatusAsync(Order order);
     }
 }

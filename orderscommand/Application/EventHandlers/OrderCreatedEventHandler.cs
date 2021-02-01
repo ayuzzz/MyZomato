@@ -1,5 +1,6 @@
 ﻿using CommonModels.Events;
 using MassTransit;
+using orderscommand.Application.ServiceBus.Abstractions;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -7,16 +8,21 @@ namespace orderscommand.Application.EventHandlers
 {
     public class OrderCreatedEventHandler : IConsumer<OrderCreatedEvent>
     {
-        public OrderCreatedEventHandler()
-        {
+        private readonly INewTransactionEventService _newTransactionEventService;
 
+        public OrderCreatedEventHandler(INewTransactionEventService newTransactionEventService)
+        {
+            _newTransactionEventService = newTransactionEventService;
         }
 
-        public Task Consume(ConsumeContext<OrderCreatedEvent> context)
+        public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
         {
-            Debug.WriteLine($"{context.Message.Id}, {context.Message.EventName}");
+            var transactionId = context.Message.Id;
 
-            return Task.FromResult(0);
+            NewTransactionEvent newTransactionEvent = new NewTransactionEvent();
+            newTransactionEvent.Id = transactionId;
+
+            await _newTransactionEventService.PublishThroughEventBus(newTransactionEvent);
         }
     }
 }

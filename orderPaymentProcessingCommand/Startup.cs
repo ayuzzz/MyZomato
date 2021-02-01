@@ -1,19 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BaseInjectionUtilities;
 using CommonModels.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using orderscommand.Application.EventHandlers;
-using orderscommand.Repositories;
-using orderscommand.Repositories.Abstractions;
-using orderscommand.Services;
-using orderscommand.Services.Abstractions;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using orderPaymentProcessingCommand.Application.EventHandlers;
 
-namespace orderscommand
+namespace orderPaymentProcessingCommand
 {
     public class Startup:AppStartupBase
     {
@@ -27,20 +28,15 @@ namespace orderscommand
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IOrderRepository, OrderRepository>();
-            services.AddSingleton<IOrderService, OrderService>();
-
             ConfigureApplicationServices(services, enableServiceBus: true);
 
-            services.AddSwaggerConfiguration("v1", "My Zomato", "Orders service Api's")
+            services.AddSwaggerConfiguration("v1", "My Zomato", "Order-Transaction command Api's")
                     .AddCorsPolicies("MyPolicy")
                     .ConfigureMassTransitForRabbitMq(Configuration, registerHandlers: new Dictionary<Type, Type>
                     {
-                        [typeof(OrderCreatedEventHandler)] = typeof(OrderCreatedEvent),
-                        [typeof(OrderStatusChangedEventHandler)] = typeof(OrderStatusChangedEvent)
+                        [typeof(NewTransactionEventHandler)] = typeof(NewTransactionEvent),
+                        [typeof(PaymentStatusChangedEventHandler)] = typeof(PaymentStatusChangedEvent)
                     });
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +53,7 @@ namespace orderscommand
                 .CorsExtension("MyPolicy").UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
-                });            
+                });
         }
     }
 }

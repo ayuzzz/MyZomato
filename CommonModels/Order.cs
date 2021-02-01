@@ -18,6 +18,7 @@ namespace CommonModels
         public Guid? TransactionId { get; set; }
         public int RestaurantId { get; set; }
         public int? UserId { get; set; }
+        public int OrderAmount { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public List<OrderProductsList> OrderProducts { get; set; } 

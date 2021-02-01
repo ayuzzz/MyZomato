@@ -26,11 +26,36 @@ namespace orderscommand.Repositories
                                 @transactionId = order.TransactionId,
                                 @restaurantId = order.RestaurantId,
                                 //@userId = order.UserId
-                                @userId = 1
+                                @userId = 1,
+                                @orderAmount = order.OrderAmount
                             }
                         );
 
             return (result > 0);
+        }
+
+        public async Task<(Order, int)> GetOrderDetails(Guid transactionId)
+        {
+            var result = await _sqlRepository.QueryMultipleAsync<Order, int>(SqlQueries.GetOrderDetails,
+                            new
+                            {
+                                @transactionId = transactionId                               
+                            }
+                        );
+
+            return (result.Item1.FirstOrDefault(), result.Item2.FirstOrDefault());
+        }
+
+        public async Task<bool> UpdateOrderStatus(Order order)
+        {
+            var result = await _sqlRepository.ExecuteAsync(SqlQueries.UpdateOrderStatus,
+                new 
+                {
+                    @status = order.Status,
+                    @orderId = order.Id
+                });
+
+            return result > 0;
         }
     }
 }

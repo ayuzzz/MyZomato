@@ -9,6 +9,7 @@ namespace CommonModels.Enums
         Ordered = 1,
         FoodIsBeingPrepared = 2,
         OutForDelivery = 3,
-        Delivered = 4
+        Delivered = 4,
+        Cancelled = 5
     }
 }

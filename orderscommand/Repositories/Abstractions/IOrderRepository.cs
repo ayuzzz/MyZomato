@@ -9,5 +9,7 @@ namespace orderscommand.Repositories.Abstractions
     public interface IOrderRepository
     {
         Task<bool> CreateNewOrderAsync(Order order);
+        Task<(Order, int)> GetOrderDetails(Guid transactionId);
+        Task<bool> UpdateOrderStatus(Order order);
     }
 }

@@ -8,7 +8,10 @@ namespace CommonModels.Queues
     {
         public static Dictionary<string, string> EventQueuePairs = new Dictionary<string, string>
         {
-            ["OrderCreatedEvent"] = @"order-created"
+            ["OrderCreatedEvent"] = @"order-created",
+            ["OrderStatusChangedEvent"] = @"order-status-change",
+            ["NewTransactionEvent"] = @"new-transaction",
+            ["PaymentStatusChangedEvent"] = @"payment-status-change"
         };
     }
 }
