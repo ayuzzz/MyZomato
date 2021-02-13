@@ -1,4 +1,8 @@
-<button (click)="checkout()" class="cart-button" mat-icon-button aria-label="Shopping Cart">
-    <mat-icon>shopping_cart</mat-icon>
-    <span [matBadge]="this.productsInCartCount" matBadgeOverlap="true"></span>    
-</button>
+<div class="cart-button">
+    <button (click)="this.toggleTheme()" mat-icon-button aria-label="Night mode" color="accent"><mat-icon>nightlight</mat-icon></button>
+    <button (click)="checkout()" mat-icon-button aria-label="Shopping Cart">
+        <mat-icon color="accent">shopping_cart</mat-icon>
+        <span [matBadge]="this.productsInCartCount" matBadgeOverlap="true"></span>    
+    </button>
+</div>
+

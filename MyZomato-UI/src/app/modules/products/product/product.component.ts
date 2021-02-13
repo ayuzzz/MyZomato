@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, HostBinding} from '@angular/core';
 import {IProduct} from '../../../core/models/product';
+import {OverlayContainer} from '@angular/cdk/overlay'
 
 @Component({
   selector: 'app-product',
@@ -17,6 +18,7 @@ export class ProductComponent implements OnInit {
   constructor() { 
     this._product = {} as IProduct;
     this.updateCartEvent = new EventEmitter<IProduct>();
+    
   }
 
   ngOnInit(): void {

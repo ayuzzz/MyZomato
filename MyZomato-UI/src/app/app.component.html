@@ -1,7 +1,7 @@
 <div class="cart-container">
-    <app-cart></app-cart>
+    <app-cart (toggleThemeEvent)="toggleTheme($event)" [ngClass] = "{'dark-theme':isDarkTheme, 'light-theme':!isDarkTheme}"></app-cart>
 </div>
-<div class="page-container">
+<div class="page-container" [ngClass] = "{'dark-theme':isDarkTheme, 'light-theme':!isDarkTheme}">
     <mat-sidenav-container>        
         <mat-sidenav class="navbar" #sidemenu mode="push">
             <mat-nav-list>                
@@ -13,12 +13,12 @@
         
         <mat-sidenav-content class="navbar">
             <button mat-icon-button class="navbar-button" (click)="toggleMenu(sidemenu)">
-                <mat-icon *ngIf="!menuToggled">menu</mat-icon>
-                <mat-icon *ngIf="menuToggled">menu_open</mat-icon>
+                <mat-icon color="primary" *ngIf="!menuToggled">menu</mat-icon>
+                <mat-icon color="primary" *ngIf="menuToggled">menu_open</mat-icon>
             </button>
         </mat-sidenav-content>
     </mat-sidenav-container>  
-    <div class="page">         
+    <div class="page" [ngClass] = "{'dark-theme':isDarkTheme, 'light-theme':!isDarkTheme}">         
         <router-outlet></router-outlet>
     </div>     
 </div>
