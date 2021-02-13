@@ -28,7 +28,7 @@ namespace orderscommand.Services
 
             foreach(var orderProduct in order.OrderProducts)
             {
-                order.OrderAmount += orderProduct.Quantity * orderProduct.Price;
+                order.OrderAmount += orderProduct.Price;
             }
 
             var result = await _orderRepository.CreateNewOrderAsync(order);

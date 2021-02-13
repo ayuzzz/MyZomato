@@ -13,6 +13,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using orderPaymentProcessingCommand.Application.EventHandlers;
+using orderPaymentProcessingCommand.Application.ServiceBus;
+using orderPaymentProcessingCommand.Application.ServiceBus.Abstractions;
+using orderPaymentProcessingCommand.Repositories;
+using orderPaymentProcessingCommand.Repositories.Abstractions;
+using orderPaymentProcessingCommand.Services;
+using orderPaymentProcessingCommand.Services.Abstractions;
 
 namespace orderPaymentProcessingCommand
 {
@@ -28,6 +34,11 @@ namespace orderPaymentProcessingCommand
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ITransactionRepository, TransactionRepository>();
+            services.AddSingleton<ITransactionService, TransactionService>();
+            services.AddSingleton<IOrderStatusChangedEventService, OrderStatusChangedEventService>();
+            services.AddSingleton<IPaymentStatusChangedEventService, PaymentStatusChangedEventService>();
+
             ConfigureApplicationServices(services, enableServiceBus: true);
 
             services.AddSwaggerConfiguration("v1", "My Zomato", "Order-Transaction command Api's")

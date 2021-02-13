@@ -39,14 +39,17 @@ namespace BaseInjectionUtilities
             {
                 services.AddMassTransit(x =>
                 {
-                    foreach (var handler in registerHandlers)
+                    foreach(var handler in registerHandlers)
                     {
                         x.AddConsumers(handler.Key);
+                    }
+                    
+                    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                    {
+                        cfg.Host($"rabbitmq://{configuration["ServiceBus:Hostname"]}");
 
-                        x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                        foreach (var handler in registerHandlers)
                         {
-                            cfg.Host($"rabbitmq://{configuration["ServiceBus:Hostname"]}");
-
                             cfg.ReceiveEndpoint(EventQueues.EventQueuePairs[handler.Value.Name], ep =>
                             {
                                 ep.PrefetchCount = 16;
@@ -54,8 +57,9 @@ namespace BaseInjectionUtilities
 
                                 ep.ConfigureConsumer(provider, handler.Key);
                             });
-                        }));
-                    }
+                        }
+                    }));
+                    
                 });
             }
             else

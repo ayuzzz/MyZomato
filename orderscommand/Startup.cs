@@ -6,10 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using orderscommand.Application.EventHandlers;
+using orderscommand.Application.ServiceBus;
+using orderscommand.Application.ServiceBus.Abstractions;
 using orderscommand.Repositories;
 using orderscommand.Repositories.Abstractions;
 using orderscommand.Services;
 using orderscommand.Services.Abstractions;
+using orderscommand.Utility;
+using orderscommand.Utility.Abstractions;
 using System;
 using System.Collections.Generic;
 
@@ -29,6 +33,11 @@ namespace orderscommand
         {
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IOrderService, OrderService>();
+            services.AddSingleton<INewTransactionEventService, NewTransactionEventService>();
+            services.AddSingleton<IOrderCreatedEventService, OrderCreatedEventService>();
+            services.AddSingleton<IOrderStatusChangedService, OrderStatusChangedEventService>();
+            services.AddSingleton<IEmailHelper, EmailHelper>();
+
 
             ConfigureApplicationServices(services, enableServiceBus: true);
 

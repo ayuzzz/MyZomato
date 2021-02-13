@@ -11,5 +11,6 @@ namespace orderscommand.Repositories.Abstractions
         Task<bool> CreateNewOrderAsync(Order order);
         Task<(Order, int)> GetOrderDetails(Guid transactionId);
         Task<bool> UpdateOrderStatus(Order order);
+        Task<FullOrderDetails> GetFullOrderDetails(Guid transactionId);
     }
 }

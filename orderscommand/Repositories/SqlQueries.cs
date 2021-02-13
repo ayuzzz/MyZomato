@@ -15,6 +15,17 @@ namespace orderscommand.Repositories
 
                                                   select PaymentStatus from [Transaction] where Id = @transactionId";
 
-        internal const string UpdateOrderStatus = @"update [Order] set Status = @status where Id = @orderId";
+        internal const string UpdateOrderStatus = @"update [Order] set Status = @status, ModifiedDate = GETDATE() where Id = @orderId";
+
+        internal const string GetDetailsForMail = @"select 
+                                                    o.Id as OrderId, os.Status as OrderStatus, o.OrderAmount,
+                                                    o.RestaurantId, r.Name as Restaurant,
+                                                    o.UserId, u.Name as [User],
+                                                    o.CreatedDate, o.ModifiedDate
+                                                    from [Order] o
+                                                    inner join Restaurants r on r.Id = o.RestaurantId
+                                                    inner join OrderStatus os on os.Id = o.Status
+                                                    inner join [User] u on u.Id = o.UserId
+                                                    where o.TransactionId = @transactionId";
     }
 }

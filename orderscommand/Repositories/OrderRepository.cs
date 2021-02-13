@@ -57,5 +57,12 @@ namespace orderscommand.Repositories
 
             return result > 0;
         }
+
+        public async Task<FullOrderDetails> GetFullOrderDetails(Guid transactionId)
+        {
+            var orderDetails = await _sqlRepository.QueryAsync<FullOrderDetails>(SqlQueries.GetDetailsForMail, new { transactionId = transactionId });
+
+            return orderDetails.FirstOrDefault();
+        }
     }
 }

@@ -22,12 +22,12 @@ namespace orderPaymentProcessingCommand.Services
             return await _transactionRepository.CreateNewTransaction(transactionId);
         }
 
-        public Task<int> GetPaymentDetailsAsync(Guid transactionId)
+        public Task<(int, int)> GetPaymentDetailsAsync(Guid transactionId)
         {
             return _transactionRepository.GetPaymentDetails(transactionId);
         }
 
-        public async Task<(int, int)> UpdatePaymentStatusAsync(Guid transactionId, int walletBalance)
+        public async Task<bool> UpdatePaymentStatusAsync(Guid transactionId, int walletBalance)
         {
             return await _transactionRepository.UpdateTransactionStatus(transactionId, walletBalance);
         }

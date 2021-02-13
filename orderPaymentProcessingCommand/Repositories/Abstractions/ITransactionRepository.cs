@@ -8,7 +8,7 @@ namespace orderPaymentProcessingCommand.Repositories.Abstractions
     public interface ITransactionRepository
     {
         Task<bool> CreateNewTransaction(Guid transactionId);
-        Task<int> GetPaymentDetails(Guid transactionId);
-        Task<(int, int)> UpdateTransactionStatus(Guid transactionId, int walletBalance);
+        Task<(int, int)> GetPaymentDetails(Guid transactionId);
+        Task<bool> UpdateTransactionStatus(Guid transactionId, int walletBalance);
     }
 }

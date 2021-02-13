@@ -36,7 +36,8 @@ namespace orderPaymentProcessingCommand.Repositories
             var result = await _sqlRepository.QueryMultipleAsync<int, int>(SqlQueries.GetPaymentDetails,
                 new
                 {
-                    transactionId = transactionId
+                    transactionId = transactionId,
+                    userId = 1 //hardcoded for now
                 });
 
             return (result.Item1.FirstOrDefault(), result.Item2.FirstOrDefault());
