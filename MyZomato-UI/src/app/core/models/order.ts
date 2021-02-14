@@ -1,10 +1,12 @@
 export interface IOrder{
     id:number,
     transactionId:string,
-    status:number,
-    createdDate:Date,
-    modifiedDate:Date
+    status:string,
+    //createdDate:Date,
+    //modifiedDate:Date
     restaurantId:number
+    restaurant:string
+    amount:number
     orderProducts:IOrderProduct[]
 }
 

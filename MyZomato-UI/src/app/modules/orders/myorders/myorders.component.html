@@ -1,0 +1,41 @@
+<div class="table-container">
+    <div *ngIf="this.orders.length == 0" class="myorders" style="text-align: center;"> 
+        <h1>No orders placed yet . . . </h1>
+    </div>
+    <div *ngIf="this.orders != null && this.orders.length > 0" class="myorders">
+        <table mat-table [dataSource]="this.orders" class="mat-elevation-z8">
+            <ng-container matColumnDef="Order Id">
+                <th mat-header-cell *matHeaderCellDef> OrderId </th>
+                <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Transaction Id">
+                <th mat-header-cell *matHeaderCellDef> TransactionId </th>
+                <td mat-cell *matCellDef="let order"> {{order.transactionId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let order"> {{order.amount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Restaurant">
+                <th mat-header-cell *matHeaderCellDef> Restaurant </th>
+                <td mat-cell *matCellDef="let order"> {{order.restaurant}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Order Date">
+                <th mat-header-cell *matHeaderCellDef> CreatedDate </th>
+                <td mat-cell *matCellDef="let order"> {{order.createdDate}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

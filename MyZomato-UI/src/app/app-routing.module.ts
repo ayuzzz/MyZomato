@@ -9,6 +9,8 @@ const routes: Routes = [
     import('./modules/restaurants/restaurants.module').then((module) => module.RestaurantsModule)},
   {path:'products', loadChildren:() => 
     import('./modules/products/products.module').then((module) => module.ProductsModule)},
+  {path:'orders', loadChildren:() =>
+  import('./modules/orders/orders.module').then((module) => module.OrdersModule)},
   {path:'', pathMatch : 'full', redirectTo:'landingpage'}
 ];
 
