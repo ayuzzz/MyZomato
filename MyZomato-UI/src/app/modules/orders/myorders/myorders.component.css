@@ -17,6 +17,8 @@ tr th{
     text-align: center;
     font-weight:900;
     font-size:small;
+    background-color: teal;
+    color: whitesmoke;
 }
 
 tr td{
@@ -34,7 +36,7 @@ tr td{
 table{
     vertical-align:middle;
     margin: auto auto;
-    width: 40%;
+    width: 100%;
 }
 
 view-order-details-dialog{

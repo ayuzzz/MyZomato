@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { IRestaurant } from "../../models/restaurant";
 import { ICity } from "../../models/city";
 import { RestaurantsApiUri } from "../../uri/restaurants-api-uri";
+import { IOrder } from "../../models/order";
 
 @Injectable()
 export class RestaurantsApiService{
@@ -25,6 +26,15 @@ export class RestaurantsApiService{
       //   };
 
       return this._http.get<ICity[]>(RestaurantsApiUri.GET_CITIES);
+                  
+  }
+
+    getAllOrders():Observable<IOrder[]>{
+      // const options = {
+      //     responseType: 'text' as const,
+      //   };
+
+      return this._http.get<IOrder[]>(RestaurantsApiUri.GET_ALL_ORDERS);
                   
   }
 }
