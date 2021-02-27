@@ -8,6 +8,10 @@ namespace CommonModels.Enums
     {
         OrderCreated = 1,
         OrderStatusChanged = 2,
-        PaymentStatusChanged = 3
+        PaymentStatusChanged = 3,
+        FoodIsBeingPrepared = 4,
+        OutForDelivery = 5,
+        Delivered = 6,
+        OrderCancelled = 7
     }
 }

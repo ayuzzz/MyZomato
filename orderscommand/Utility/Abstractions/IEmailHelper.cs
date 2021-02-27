@@ -9,6 +9,6 @@ namespace orderscommand.Utility.Abstractions
     public interface IEmailHelper
     {
         Task<string> OrderCreatedMailBody(Guid transactionId);
-        Task<Email> CreateMailWrapper(Guid transactionId);
+        Task<Email> CreateMailWrapper(Guid transactionId, int emailType);
     }
 }

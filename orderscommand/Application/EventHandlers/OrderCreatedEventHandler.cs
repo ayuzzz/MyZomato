@@ -1,4 +1,5 @@
-﻿using CommonModels.Events;
+﻿using CommonModels.Enums;
+using CommonModels.Events;
 using Examples.SmtpExamples.Async;
 using MassTransit;
 using orderscommand.Application.ServiceBus.Abstractions;
@@ -26,7 +27,7 @@ namespace orderscommand.Application.EventHandlers
             NewTransactionEvent newTransactionEvent = new NewTransactionEvent();
             newTransactionEvent.Id = transactionId;
 
-            var email = await _emailHelper.CreateMailWrapper(transactionId);
+            var email = await _emailHelper.CreateMailWrapper(transactionId, (int)EmailType.OrderCreated);
             EmailUtility.SendMail(email);
 
             await _newTransactionEventService.PublishThroughEventBus(newTransactionEvent);
