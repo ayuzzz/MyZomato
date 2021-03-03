@@ -38,5 +38,18 @@ namespace restaurantsquery.Controllers
                 return Ok(await _restaurantService.GetRestaurantDetailsAsync(restaurantId));
             }
         }
+
+        [HttpGet]
+        [Route("orders")]
+        public async Task<IActionResult> GetOrders()
+        {
+            //if (userId < 0)
+            //    return BadRequest("Invalid user Id");
+            //else
+            {
+                int userId = 1;
+                return Ok(await _restaurantService.GetAllOrdersAsync(userId));
+            }
+        }
     }
 }

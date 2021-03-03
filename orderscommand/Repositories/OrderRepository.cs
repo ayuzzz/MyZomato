@@ -1,9 +1,12 @@
 ﻿using CommonModels;
 using CommonUtilities.Abstractions;
+using Dapper;
 using orderscommand.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace orderscommand.Repositories
@@ -31,7 +34,29 @@ namespace orderscommand.Repositories
                             }
                         );
 
-            return (result > 0);
+            int newResult = 0;
+
+            if(result > 0)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ProductId", typeof(int));
+                dt.Columns.Add("Quantity", typeof(int));
+                dt.Columns.Add("Price", typeof(int));
+
+                foreach(var product in order.OrderProducts)
+                {
+                    dt.Rows.Add(product.ProductId, product.Quantity, product.Price);
+                }
+
+                newResult = await _sqlRepository.ExecuteAsync(SqlQueries.InsertOrderProducts_sp, 
+                    new
+                    {
+                        @transactionId = order.TransactionId,
+                        @products = dt.AsTableValuedParameter("dbo.OrderProducts_Type")
+                    }, commandType:CommandType.StoredProcedure);
+            }
+
+            return (newResult > 0);
         }
 
         public async Task<(Order, int)> GetOrderDetails(Guid transactionId)

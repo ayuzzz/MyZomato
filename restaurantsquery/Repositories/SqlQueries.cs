@@ -42,6 +42,20 @@ namespace restaurantsquery.Repositories
                                                         inner join Category c on c.Id = csm.CategoryId
                                                         inner join SubCategory sc on sc.Id = csm.SubcategoryId
                                                         where r.Id = @restaurantId";
-        
+
+        internal const string GetOrders = @"select 
+                                            o.Id, os.Status, o.OrderAmount as Amount, o.TransactionId,
+                                            o.RestaurantId, r.Name as Restaurant,
+                                            o.UserId, u.Name as [User],
+                                            o.CreatedDate, o.ModifiedDate
+                                            from [Order] o
+                                            inner join Restaurants r on r.Id = o.RestaurantId
+                                            inner join OrderStatus os on os.Id = o.Status
+                                            inner join [User] u on u.Id = o.UserId
+                                            where o.UserId = @userId
+
+                                            select op.OrderId, op.ProductId, op.Quantity, op.Price 
+                                            from OrderProducts op inner join [Order] o on o.Id = op.OrderId
+                                            where o.UserId = @userId";
     }
 }

@@ -61,5 +61,12 @@ namespace restaurantsquery.Services
 
             return details;
         }
+
+        public async Task<List<AllOrderDetails>> GetAllOrdersAsync(int userId)
+        {
+            List<AllOrderDetails> allOrders = await _restaurantRepository.GetAllOrders(userId);
+
+            return allOrders;
+        }
     }
 }

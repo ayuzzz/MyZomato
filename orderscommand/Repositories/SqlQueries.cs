@@ -27,5 +27,7 @@ namespace orderscommand.Repositories
                                                     inner join OrderStatus os on os.Id = o.Status
                                                     inner join [User] u on u.Id = o.UserId
                                                     where o.TransactionId = @transactionId";
+
+        internal const string InsertOrderProducts_sp = "sp_InsertOrderProducts";
     }
 }

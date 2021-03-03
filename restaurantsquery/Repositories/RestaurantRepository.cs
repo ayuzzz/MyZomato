@@ -29,5 +29,21 @@ namespace restaurantsquery.Repositories
             var restaurantsDetails = await _sqlRepository.QueryMultipleAsync<RestaurantDetails, CategorySubcategory>(SqlQueries.GetRestaurantDetails, new { restaurantId });
             return restaurantsDetails;
         }
+
+        public async Task<List<AllOrderDetails>> GetAllOrders(int userId)
+        {
+            var orderDetails = await _sqlRepository.QueryMultipleAsync<AllOrderDetails, OrderProductsList>(SqlQueries.GetOrders, new { userId = userId });
+
+            var allOrders = orderDetails.Item1;
+            var orderProducts = orderDetails.Item2;
+
+            foreach(var order in allOrders)
+            {
+                order.OrderProducts = new List<OrderProductsList>();
+                order.OrderProducts.AddRange(orderProducts.Where(o => o.OrderId == order.Id));
+            }
+
+            return allOrders.ToList();
+        }
     }
 }

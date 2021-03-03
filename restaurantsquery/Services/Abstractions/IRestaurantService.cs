@@ -11,5 +11,6 @@ namespace restaurantsquery.Services.Abstractions
     {
         Task<List<Restaurant>> GetRestaurantsForCity(int cityId);
         Task<RestaurantDetails> GetRestaurantDetailsAsync(int restaurantId);
+        Task<List<AllOrderDetails>> GetAllOrdersAsync(int userId);
     }
 }

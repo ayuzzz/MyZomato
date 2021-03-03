@@ -11,5 +11,6 @@ namespace restaurantsquery.Repositories.Abstractions
     {
         Task<List<Restaurant>> GetAllRestaurants(int cityId);
         Task<Tuple<IEnumerable<RestaurantDetails>, IEnumerable<CategorySubcategory>>> GetAllRestaurantDetailsAsync(int restaurantId);
+        Task<List<AllOrderDetails>> GetAllOrders(int userId);
     }
 }
