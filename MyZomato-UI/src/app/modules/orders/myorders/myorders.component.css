@@ -12,8 +12,8 @@
 }
 
 tr th{
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
     text-align: center;
     font-weight:900;
     font-size:small;
@@ -22,8 +22,8 @@ tr th{
 }
 
 tr td{
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
     text-align: center;
     width: fit-content;
 }
@@ -46,3 +46,22 @@ view-order-details-dialog{
     margin-top:2%;
 }
 
+.innerTable{
+    width: 100%;
+    margin-left:0px;
+    margin-right: 0px;
+}
+
+.innerTable-th{
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    font-weight:900;
+    font-size:small;
+    background-color: blue;
+    color: whitesmoke;
+}
+
+.innerTable{
+    border: 2px solid gray;
+}
