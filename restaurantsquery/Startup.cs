@@ -14,9 +14,9 @@ using System;
 
 namespace restaurantsquery
 {
-    public class Startup
+    public class Startup:AppStartupBase
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration):base(configuration)
         {
             Configuration = configuration;
         }
@@ -26,29 +26,15 @@ namespace restaurantsquery
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCommonUtilitiesLibrary();
-            services.AddControllers();
+            
             services.AddSingleton<IRestaurantService, RestaurantService>();
             services.AddSingleton<IRestaurantRepository, RestaurantRepository>();
             services.AddSingleton<ILocationService, LocationService>();
             services.AddSingleton<ILocationRepository, LocationRepository>();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "MyZomato",
-                    Description = "MyZomato Api's"  
-                });
-            });
-
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+            ConfigureApplicationServices(services);
+            services.AddSwaggerConfiguration("v1", "My Zomato", "Rerstaurant Service Api's")
+                    .AddCorsPolicies("MyPolicy");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,24 +45,13 @@ namespace restaurantsquery
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyZomato");
-            });
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseCors("MyPolicy");
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            
+            app.SwaggerExtension("/swagger/v1/swagger.json", "MyZomato")
+               .UseHttpsRedirection()
+               .UseRouting()
+               .CorsExtension("MyPolicy").UseEndpoints(endpoints =>
+               {
+                   endpoints.MapControllers();
+               });
         }
     }
 }

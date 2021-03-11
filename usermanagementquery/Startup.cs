@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseInjectionUtilities;
-using CommonModels.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,15 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using orderPaymentProcessingCommand.Application.EventHandlers;
-using orderPaymentProcessingCommand.Application.ServiceBus;
-using orderPaymentProcessingCommand.Application.ServiceBus.Abstractions;
-using orderPaymentProcessingCommand.Repositories;
-using orderPaymentProcessingCommand.Repositories.Abstractions;
-using orderPaymentProcessingCommand.Services;
-using orderPaymentProcessingCommand.Services.Abstractions;
+using usermanagementquery.Repositories;
+using usermanagementquery.Repositories.Abstraction;
+using usermanagementquery.Services;
+using usermanagementquery.Services.Abstraction;
 
-namespace orderPaymentProcessingCommand
+namespace usermanagementquery
 {
     public class Startup:AppStartupBase
     {
@@ -34,20 +30,12 @@ namespace orderPaymentProcessingCommand
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ITransactionRepository, TransactionRepository>();
-            services.AddSingleton<ITransactionService, TransactionService>();
-            services.AddSingleton<IOrderStatusChangedEventService, OrderStatusChangedEventService>();
-            services.AddSingleton<IPaymentStatusChangedEventService, PaymentStatusChangedEventService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
 
-            ConfigureApplicationServices(services, enableServiceBus: true);
-
-            services.AddSwaggerConfiguration("v1", "My Zomato", "Order-Payments command Api's")
-                    .AddCorsPolicies("MyPolicy")
-                    .ConfigureMassTransitForRabbitMq(Configuration, registerHandlers: new Dictionary<Type, Type>
-                    {
-                        [typeof(NewTransactionEventHandler)] = typeof(NewTransactionEvent),
-                        [typeof(PaymentStatusChangedEventHandler)] = typeof(PaymentStatusChangedEvent)
-                    });
+            ConfigureApplicationServices(services);
+            services.AddSwaggerConfiguration("v1", "My Zomato", "User management service Api's")
+                    .AddCorsPolicies("MyPolicy");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

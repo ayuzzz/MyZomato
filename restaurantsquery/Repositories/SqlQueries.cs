@@ -54,8 +54,9 @@ namespace restaurantsquery.Repositories
                                             inner join [User] u on u.Id = o.UserId
                                             where o.UserId = @userId
 
-                                            select op.OrderId, op.ProductId, op.Quantity, op.Price 
+                                            select op.OrderId, op.ProductId, p.ProductName, op.Quantity, op.Price 
                                             from OrderProducts op inner join [Order] o on o.Id = op.OrderId
+                                            inner join Product p on p.Id = op.ProductId
                                             where o.UserId = @userId";
     }
 }
