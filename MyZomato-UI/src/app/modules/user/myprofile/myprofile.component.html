@@ -1,0 +1,27 @@
+<div class="grid-container">
+    <div class="profile-picture">
+        <img src="../../../../assets/user.png"/>
+    </div>
+    <form [formGroup] ="userFormGroup" class="details-grid">
+        <div class="details">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="name" value={{this.userDetails[0].name}}/>
+            </mat-form-field>
+        </div>
+
+        <div class="details">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="email" value={{this.userDetails[0].email}}/>
+            </mat-form-field>
+        </div>
+
+        <div class="details">
+            <mat-form-field>
+                <mat-label>Contact Number</mat-label>
+                <input matInput type="text" formControlName="contactNumber" value={{this.userDetails[0].contactNumber}}/>
+            </mat-form-field>
+        </div>
+    </form>
+</div>

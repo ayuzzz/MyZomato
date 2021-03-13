@@ -11,6 +11,8 @@ const routes: Routes = [
     import('./modules/products/products.module').then((module) => module.ProductsModule)},
   {path:'orders', loadChildren:() =>
   import('./modules/orders/orders.module').then((module) => module.OrdersModule)},
+  {path:'profile', loadChildren:() =>
+  import ('./modules/user/user.module').then((module) => module.UserModule)},
   {path:'', pathMatch : 'full', redirectTo:'landingpage'}
 ];
 

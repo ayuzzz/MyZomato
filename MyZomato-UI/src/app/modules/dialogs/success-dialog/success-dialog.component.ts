@@ -39,7 +39,7 @@ export class SuccessDialogComponent implements OnInit {
 
     let orderProducts = JSON.parse(localStorage.getItem('productsInCart') as string) as IProduct[];
     orderProducts.forEach(product => {
-      order.orderProducts.push({productId:product.id, quantity:product.quantity, price:product.price*product.quantity});
+      order.orderProducts.push({productId:product.id, productName:"", quantity:product.quantity, price:product.price*product.quantity});
     });
 
     return order;

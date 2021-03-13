@@ -1,5 +1,8 @@
 import { Component, HostBinding} from '@angular/core';
 import {OverlayContainer} from '@angular/cdk/overlay'
+import { UserApiService } from './core/services/api-services/user-api.service';
+import { IUser } from './core/models/user';
+import { AvatarGeneratorrService } from './core/services/utilities/avatar-generatorr.service';
 
 const THEME_DARKNESS_SUFFIX = `-dark`
 
@@ -13,8 +16,16 @@ export class AppComponent {
   menuToggled:boolean = false;
   title = 'MyZomato-UI';
   isDarkTheme:boolean = false;
+  currentUser:IUser = {userId:1};
+  userInitials:string = "";
 
-  constructor(private overlayContainer: OverlayContainer) { 
+  constructor(private _userService:UserApiService, private _avatarGenerator:AvatarGeneratorrService) {
+
+    this._userService.getUserDetails(1).subscribe((response) => {this.currentUser = response[0];
+        sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        this.userInitials = _avatarGenerator.getInitials();
+      });
+    
     var darkTheme = JSON.parse(localStorage.getItem('isDark') as string) as boolean;
     if(darkTheme === null)
     {

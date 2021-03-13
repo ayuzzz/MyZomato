@@ -4,9 +4,10 @@
 <div class="page-container" [ngClass] = "{'dark-theme':isDarkTheme, 'light-theme':!isDarkTheme}">
     <mat-sidenav-container>        
         <mat-sidenav class="navbar" #sidemenu mode="push">
-            <mat-nav-list>                
+            <mat-nav-list>
+                <a mat-list-item><div class="navlink-text">Hi {{this.userInitials}} {{this.currentUser.name}}</div></a>                 
                 <a mat-list-item routerLink="/landingpage"><mat-icon>home</mat-icon><div class="navlink-text">Home</div></a>
-                <a mat-list-item routerLink="/profile"><mat-icon>account_circle</mat-icon><div class="navlink-text">Profile</div></a>
+                <a mat-list-item routerLink="/profile/my-profile"><mat-icon>account_circle</mat-icon><div class="navlink-text">Profile</div></a>
                 <a mat-list-item routerLink="/orders/my-orders"><mat-icon>shopping_cart</mat-icon><div class="navlink-text">My Orders</div></a>
             </mat-nav-list> 
         </mat-sidenav>   

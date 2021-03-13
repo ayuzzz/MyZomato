@@ -19,6 +19,7 @@ import { ProductsAppRoutingModule } from './modules/products/products-app-routin
 import { CartComponent } from './modules/landingpage/cart/cart.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { OrdersAppRoutingModule } from './modules/orders/orders-app-routing.module';
+import { UserAppRoutingModule } from './modules/user/user-app-routing.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { OrdersAppRoutingModule } from './modules/orders/orders-app-routing.modu
     ProductsAppRoutingModule,
     MatBadgeModule,
     MatSlideToggleModule,
-    OrdersAppRoutingModule
+    OrdersAppRoutingModule,
+    UserAppRoutingModule
   ],
   providers: [
     RestaurantsApiService,

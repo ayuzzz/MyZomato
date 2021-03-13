@@ -1,0 +1,30 @@
+.grid-container{
+    display: flexbox;
+    flex-direction: row;
+}
+
+.profile-picture{
+    height: 200px;
+    width: 200px;
+}
+
+.details-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.details{ 
+    flex-basis: 50%;
+    margin-top: 30px;
+}
+
+mat-form-field{
+    width: 50%;
+}
+
+img{
+    width: inherit;
+    height: auto;
+}
