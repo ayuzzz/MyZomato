@@ -105,8 +105,7 @@ export class SearchbarComponent implements OnInit {
     console.log(this.router.url);
       if(this.restaurantFormControl.value != null && this.restaurantFormControl.value != '')
       {
-          // this.router.navigate(['/products/', this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id]);
-          // console.log("Url : " + "/products/" + this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id);
+          this.router.navigate(['products-for-restaurant/', this.filteredList.filter(rest => rest.name === this.restaurantFormControl.value)[0].id])
       }
       else
       {
