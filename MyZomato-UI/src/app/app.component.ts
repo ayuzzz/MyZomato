@@ -18,12 +18,15 @@ export class AppComponent {
   isDarkTheme:boolean = false;
   currentUser:IUser = {userId:1};
   userInitials:string = "";
+  avatarColor:string = "";
 
   constructor(private _userService:UserApiService, private _avatarGenerator:AvatarGeneratorrService) {
 
     this._userService.getUserDetails(1).subscribe((response) => {this.currentUser = response[0];
+       
         sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.userInitials = _avatarGenerator.getInitials();
+        this.avatarColor = _avatarGenerator.randomizeColors();
       });
     
     var darkTheme = JSON.parse(localStorage.getItem('isDark') as string) as boolean;

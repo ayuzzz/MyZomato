@@ -29,10 +29,17 @@ export class AvatarGeneratorrService {
     {
       for(var i = 0; i < 2; i++)
       {
-        initials += splitName[0][0];
+        initials += splitName[i][0];
       }
     }
 
     return initials;
+  }
+
+  randomizeColors():string{
+    var colorsArray:string[] = ["indigo", "teal", "midnightblue", "black", "crimson"];
+    var colorIndex:number = Math.floor(Math.random() * colorsArray.length);
+
+    return colorsArray[colorIndex];
   }
 }
