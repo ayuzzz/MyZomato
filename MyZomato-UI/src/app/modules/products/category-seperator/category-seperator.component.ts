@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/core/models/product';
+import { CartUpdateService } from 'src/app/core/services/api-services/cart-update.service';
 import { ProductsApiService } from 'src/app/core/services/api-services/products-api.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class CategorySeperatorComponent implements OnInit {
   productsInCart:IProduct[];
   restaurantId:number;
 
-  constructor(private _router:ActivatedRoute, private _productApiService:ProductsApiService) { 
+  constructor(private _router:ActivatedRoute, private _productApiService:ProductsApiService, private _cartUpdateService:CartUpdateService) { 
     this.productsList = [];
     this.productsInCart = [];
     this.distinctCategories = [];
@@ -93,6 +94,6 @@ export class CategorySeperatorComponent implements OnInit {
     }
 
     localStorage.setItem("productsInCart", JSON.stringify(this.productsInCart));
+    this._cartUpdateService.cartQuantity.next(this.productsInCart != null ? this.productsInCart.length :0)
   }
-
 }

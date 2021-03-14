@@ -8,10 +8,15 @@ export class AvatarGeneratorrService {
   currentUser:IUser = {userId:1}
 
   constructor() { 
+    
+  }
+
+  populateUserDetails(){
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')?.toString() as string) as IUser;
   }
 
   getInitials(){
+    this.populateUserDetails();
     var userName:string = this.currentUser.name as string;
     var splitName:string[] = userName?.split(' ') as string[];
     var initials:string = "";

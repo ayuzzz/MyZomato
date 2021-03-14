@@ -1,10 +1,7 @@
 import { Component, HostBinding} from '@angular/core';
-import {OverlayContainer} from '@angular/cdk/overlay'
 import { UserApiService } from './core/services/api-services/user-api.service';
 import { IUser } from './core/models/user';
 import { AvatarGeneratorrService } from './core/services/utilities/avatar-generatorr.service';
-
-const THEME_DARKNESS_SUFFIX = `-dark`
 
 @Component({
   selector: 'app-root',
@@ -15,26 +12,26 @@ export class AppComponent {
   
   menuToggled:boolean = false;
   title = 'MyZomato-UI';
-  isDarkTheme:boolean = false;
+  isDarkTheme:boolean = true;
   currentUser:IUser = {userId:1};
   userInitials:string = "";
   avatarColor:string = "";
 
   constructor(private _userService:UserApiService, private _avatarGenerator:AvatarGeneratorrService) {
 
-    this._userService.getUserDetails(1).subscribe((response) => {this.currentUser = response[0];
-       
+    this._userService.getUserDetails(1).subscribe((response) => {this.currentUser = response[0];       
         sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.userInitials = _avatarGenerator.getInitials();
         this.avatarColor = _avatarGenerator.randomizeColors();
       });
     
     var darkTheme = JSON.parse(localStorage.getItem('isDark') as string) as boolean;
-    if(darkTheme === null)
+    if(darkTheme === null || darkTheme == false)
     {
-      localStorage.setItem('isDark', JSON.stringify(false));      
-    }    
-    document.body.classList.remove('mat-app-background');
+      localStorage.setItem('isDark', JSON.stringify(false)); 
+      document.body.classList.remove('mat-app-background'); 
+      this.isDarkTheme = darkTheme;    
+    }
   }
 
   toggleMenu(sidemenu:any){

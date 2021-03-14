@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IOrder, IOrderProduct } from 'src/app/core/models/order';
 import {IProduct} from 'src/app/core/models/product';
+import { CartUpdateService } from 'src/app/core/services/api-services/cart-update.service';
 import { OrderApiService } from 'src/app/core/services/api-services/order-api.service';
 
 
@@ -13,20 +14,20 @@ import { OrderApiService } from 'src/app/core/services/api-services/order-api.se
 })
 export class SuccessDialogComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private router:Router, private _orderApiService:OrderApiService) { }
+  constructor(public dialog: MatDialog, private router:Router, private _orderApiService:OrderApiService,
+    private _cartUpdateService:CartUpdateService) { }
 
   ngOnInit(): void {
   }
 
-  openSuccessDialog(){
-
-    
+  openSuccessDialog(){    
     this._orderApiService.createOrder(this.createOrderObject()).subscribe(data => {});
     localStorage.removeItem('restaurantId');
     localStorage.removeItem('productsInCart');
 
     const successDialogReference = this.dialog.open(SuccessDialogContent);
     successDialogReference.afterClosed().subscribe(result => {
+      this._cartUpdateService.cartQuantity.next(0);
       this.router.navigate(['landingpage']);
     });
   }
