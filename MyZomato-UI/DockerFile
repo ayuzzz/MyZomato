@@ -1,0 +1,16 @@
+# Stage 1 - compiuling angular app
+FROM node AS build-phase
+
+WORKDIR /usr/src/app
+
+COPY package.json package-lock.json ./
+
+RUN npm cache clean --force
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2 - serving the app using nginx server
+FROM nginx
+
+COPY --from=build-phase /usr/src/app/dist/MyZomato-UI /usr/share/nginx/html
