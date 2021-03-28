@@ -11,30 +11,30 @@ export class RestaurantsApiService{
 
     constructor(private _http:HttpClient) {}
 
-    getRestaurants(cityId:number):Observable<IRestaurant[]>{
+    async getRestaurants(cityId:number):Promise<IRestaurant[]>{
         // const options = {
         //     responseType: 'text' as const,
         //   };
 
-        return this._http.get<IRestaurant[]>(RestaurantsApiUri.GET_RESTAURANTS_FORCITY+cityId.toString());
+        return await this._http.get<IRestaurant[]>(RestaurantsApiUri.GET_RESTAURANTS_FORCITY+cityId.toString()).toPromise();
                     
     }
 
-    getCities():Observable<ICity[]>{
+    async getCities():Promise<ICity[]>{
       // const options = {
       //     responseType: 'text' as const,
       //   };
 
-      return this._http.get<ICity[]>(RestaurantsApiUri.GET_CITIES);
+      return await this._http.get<ICity[]>(RestaurantsApiUri.GET_CITIES).toPromise();
                   
   }
 
-    getAllOrders():Observable<IOrder[]>{
+    async getAllOrders():Promise<IOrder[]>{
       // const options = {
       //     responseType: 'text' as const,
       //   };
 
-      return this._http.get<IOrder[]>(RestaurantsApiUri.GET_ALL_ORDERS);
+      return await this._http.get<IOrder[]>(RestaurantsApiUri.GET_ALL_ORDERS).toPromise();
                   
   }
 }

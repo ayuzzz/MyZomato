@@ -17,14 +17,7 @@ export class AppComponent {
   userInitials:string = "";
   avatarColor:string = "";
 
-  constructor(private _userService:UserApiService, private _avatarGenerator:AvatarGeneratorrService) {
-
-    this._userService.getUserDetails(1).subscribe((response) => {this.currentUser = response[0];       
-        sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        this.userInitials = _avatarGenerator.getInitials();
-        this.avatarColor = _avatarGenerator.randomizeColors();
-      });
-    
+  constructor(private _userService:UserApiService, private _avatarGenerator:AvatarGeneratorrService) {    
     var darkTheme = JSON.parse(localStorage.getItem('isDark') as string) as boolean;
     if(darkTheme === null || darkTheme == false)
     {
@@ -32,6 +25,14 @@ export class AppComponent {
       document.body.classList.remove('mat-app-background'); 
       this.isDarkTheme = darkTheme;    
     }
+  }
+
+  async ngOnInit(){
+    let userResponse = await this._userService.getUserDetails(1);
+    this.currentUser = userResponse[0];
+    sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    this.userInitials = this._avatarGenerator.getInitials();
+    this.avatarColor = this._avatarGenerator.randomizeColors();
   }
 
   toggleMenu(sidemenu:any){

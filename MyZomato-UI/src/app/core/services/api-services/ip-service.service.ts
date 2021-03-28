@@ -11,14 +11,14 @@ export class IpService {
     this.ACCESS_KEY = "789e1f85712033e827b58e0445a7125f";
   }
 
-  getIpAddress():Observable<any>
+  async getIpAddress():Promise<any>
   {
-    return this._http.get(IpApiUri.GET_IP_ADDRESS);
+    return await this._http.get(IpApiUri.GET_IP_ADDRESS).toPromise();
   }
 
-  getGeoLocation(ipAddress:string):Observable<any>{
+  async getGeoLocation(ipAddress:string):Promise<any>{
     let url = IpApiUri.GET_GEOLOCATION_BASE + ipAddress + "?access_key=" + this.ACCESS_KEY;
 
-    return this._http.get(url);
+    return await this._http.get(url).toPromise();
   }
 }

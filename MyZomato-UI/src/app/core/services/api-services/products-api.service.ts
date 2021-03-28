@@ -11,9 +11,9 @@ export class ProductsApiService {
 
   constructor(private _httpClient:HttpClient, ) { }
 
-  getProductsForRestaurant(restaurantId:number):Observable<IProduct[]>{
+  async getProductsForRestaurant(restaurantId:number):Promise<IProduct[]>{
     
-    return this._httpClient.get<IProduct[]>(ProductsApiUri.GET_PRODUCTS_FOR_RESTAURANT + restaurantId.toString());
+    return await this._httpClient.get<IProduct[]>(ProductsApiUri.GET_PRODUCTS_FOR_RESTAURANT + restaurantId.toString()).toPromise();
 
   }
 }

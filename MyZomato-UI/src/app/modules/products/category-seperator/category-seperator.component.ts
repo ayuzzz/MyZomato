@@ -35,16 +35,12 @@ export class CategorySeperatorComponent implements OnInit {
     this.getProductsForRestaurant(this.restaurantId);
   }
 
-  getProductsForRestaurant(restaurantId:number){
-    this._productApiService.getProductsForRestaurant(this.restaurantId).subscribe(
-      (response) => {this.productsList = response; this.populateCategories()});
+  async getProductsForRestaurant(restaurantId:number){
+    this.productsList = await this._productApiService.getProductsForRestaurant(this.restaurantId);
+    this.populateCategories();
   }   
 
   populateCategories(){
-    // this.productsList.map(prod => {if(!this.distinctCategories.includes(prod.category)){
-    //   this.distinctCategories.push(prod.category.toLocaleUpperCase())}
-    // });
-
     this.distinctCategories = this.productsList.map(prod => prod.category)
     .filter((value, index, self) => self.indexOf(value) === index);
   }

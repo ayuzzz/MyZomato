@@ -18,12 +18,11 @@ export class RestaurantsListComponent implements OnInit {
 
   ngOnInit(): void {
     let city:number = parseInt(this._activatedRoute.snapshot.paramMap.get('cityId') as string);
-     this.getAllRestaurants(city);
+    this.getAllRestaurants(city);
   }
 
-  getAllRestaurants(cityId:number){
-    this._restaurantsApiService.getRestaurants(cityId)
-    .subscribe((result) => this.responseList = result)
+  async getAllRestaurants(cityId:number){
+    this.responseList = await this._restaurantsApiService.getRestaurants(cityId);
 }
 
 }
