@@ -10,9 +10,9 @@ namespace CommonModels
         {
             Host = "smtp.gmail.com";
             Port = 587;
-            Username = "xyz@gmail.com";
-            Password = "*********";
-            FromAddress = "xyz@gmail.com";
+            Username = "joshiayush2426new@gmail.com";
+            Password = "P@ssw0RD@123";
+            FromAddress = "joshiayush2426new@gmail.com";
             DisplayName = "My Zomato";
         }
 
