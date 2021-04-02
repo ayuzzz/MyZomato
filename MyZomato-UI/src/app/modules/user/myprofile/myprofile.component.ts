@@ -24,12 +24,10 @@ export class MyprofileComponent implements OnInit {
     })    
    }
 
-  ngOnInit(): void {
-    this._userService.getUserDetails(this.userId)
-                     .subscribe((response) => {this.userDetails = response; 
-                      this.userFormGroup.get('name')?.setValue(this.userDetails[0].name);
-                      this.userFormGroup.get('email')?.setValue(this.userDetails[0].email)
-                      this.userFormGroup.get('contactNumber')?.setValue(this.userDetails[0].contactNumber)
-                    })
+  async ngOnInit() {
+    this.userDetails = await this._userService.getUserDetails(this.userId);
+    this.userFormGroup.get('name')?.setValue(this.userDetails[0].name);
+    this.userFormGroup.get('email')?.setValue(this.userDetails[0].email);
+    this.userFormGroup.get('contactNumber')?.setValue(this.userDetails[0].contactNumber);
   }
 }

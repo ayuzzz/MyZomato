@@ -36,29 +36,37 @@ export class SearchbarComponent implements OnInit {
     this.defaultCity = 0;
   }
 
-  ngOnInit() {
-    this.getIpAddress(); 
+  async ngOnInit() {
+    this.ip = await this.getIpAddress(); 
+    this.city = await this.getLocation();
+    await this.getAllCities();
+    await this.populateDefaultCity()
   }
 
-  getIpAddress(){
-    this._ipService.getIpAddress()
-                    .subscribe((response) => {this.ip += response.ip; this.getLocation()});
+  async getIpAddress(){
+    var ip = await this._ipService.getIpAddress();
+                    //.then((response) => { ip = ip + response.ip;});
+                    
+
+    return ip;
   }
 
-  getLocation():void{ //removing graphemes from range U+0300 → U+036F
-    this._ipService.getGeoLocation(this.ip)
-                    .subscribe((response) => {this.city += response.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                                                this.getAllCities();
-                                              });                     
+  async getLocation(){ //removing graphemes from range U+0300 → U+036F
+    let fetchedCity = await this._ipService.getGeoLocation(this.ip);
+    let parsedCity = fetchedCity.city != null ? "" + fetchedCity.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "Bhilai";
+    return parsedCity;
   }
 
-  getAllCities(){
-    this._httpHelper.getCities()
-                    .subscribe((response) => {response.map((city => this.allCities.push(city)));
-                                              this.populateDefaultCity()})
+  async getAllCities(){
+    let citiesResponse = await this._httpHelper.getCities();
+    citiesResponse.map((city => this.allCities.push(city)));
   }
 
-  populateDefaultCity(){
+  async getAllRestaurants(cityId:number){
+    this.allRestaurants = await this._httpHelper.getRestaurants(cityId);
+}
+
+  async populateDefaultCity(){
 
     if(this.allCities.some(c => c.name.toLowerCase() == this.city.toLowerCase()))
     {
@@ -78,16 +86,11 @@ export class SearchbarComponent implements OnInit {
        
   }
 
-  getAllRestaurants(cityId:number){
-      this._httpHelper.getRestaurants(cityId)
-      .subscribe((result) => this.allRestaurants = result)
-  }
-
-  cityChanged(){
+  async cityChanged(){
     
     this.isRestaurantDisabled = false;
     this.restaurantFormControl.enable();
-    this.getAllRestaurants(parseInt(this.cityFormControl.value));
+    await this.getAllRestaurants(parseInt(this.cityFormControl.value));
     this.changeFilteredList();    
   }
 

@@ -32,8 +32,9 @@ export class MyordersComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this._productService.getProductsForRestaurant(0).subscribe((result) => this.allProducts = result);
-    this._restaurantService.getAllOrders().subscribe((result) => {this.orders = result; this.isLoading = false;});
+    this.allProducts = await this._productService.getProductsForRestaurant(0);
+    this.orders = await this._restaurantService.getAllOrders();
+    this.isLoading = false;
     this.orders.map(o => o.orderProducts.map(op => op.productName = this.allProducts.filter(p => p.id == op.productId)[0].productName))
   }
 

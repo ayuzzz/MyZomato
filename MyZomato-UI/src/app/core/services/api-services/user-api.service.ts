@@ -11,7 +11,7 @@ export class UserApiService {
 
   constructor(private _httpClient:HttpClient) { }
 
-  getUserDetails(userId:number):Observable<IUser[]>{
-    return this._httpClient.get<IUser[]>(UserApiUri.GET_USERDETAILS + userId.toString());
+  async getUserDetails(userId:number):Promise<IUser[]>{
+    return await this._httpClient.get<IUser[]>(UserApiUri.GET_USERDETAILS + userId.toString()).toPromise();
   }
 }
