@@ -12,10 +12,10 @@ namespace CommonUtilities.ServiceBus
 {
     public class ServicebusConnectionFactory : IServicebusConnectionFactory
     {
-        private const string _userName = "guest";
-        private const string _password = "guest";
+        private const string _userName = "myzomato";
+        private const string _password = "myzomato";
         private const string _virtualHost = "/";
-        private const string _hostName = "localhost";
+        private const string _hostName = "192.168.1.8";
 
         public Task<string> GetServicebusEndpointUrl<TEvent>(TEvent @event)
         {

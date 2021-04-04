@@ -27,13 +27,13 @@ namespace productquery
         {
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
-            services.AddSingleton<IOrderCreatedService, OrderCreatedEventService>();
+            
 
-            ConfigureApplicationServices(services, enableServiceBus: true);
+            ConfigureApplicationServices(services);
 
             services.AddSwaggerConfiguration("v1", "My Zomato", "Product service Api's")
-                    .AddCorsPolicies("MyPolicy")
-                    .ConfigureMassTransitForRabbitMq(Configuration);
+                    .AddCorsPolicies("MyPolicy");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

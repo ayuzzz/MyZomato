@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace BaseInjectionUtilities
@@ -46,7 +47,11 @@ namespace BaseInjectionUtilities
                     
                     x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                     {
-                        cfg.Host($"rabbitmq://{configuration["ServiceBus:Hostname"]}");
+                        cfg.Host($"rabbitmq://{configuration["ServiceBus:Hostname"]}", settings =>
+                        {
+                            settings.Username(configuration["ServiceBus:Username"]);
+                            settings.Password(configuration["ServiceBus:Password"]);
+                        });
 
                         foreach (var handler in registerHandlers)
                         {

@@ -14,14 +14,10 @@ namespace productquery.Controllers
     public class ProductController : ControllerBase
     {
         private IProductService _productService;
-        private readonly IBusControl _bus;
-        private readonly IOrderCreatedService _orderCreatedService;
 
-        public ProductController(IProductService productService, IBusControl bus, IOrderCreatedService orderCreatedService)
+        public ProductController(IProductService productService)
         {
             _productService = productService;
-            _bus = bus;
-            _orderCreatedService = orderCreatedService;
         }
 
         [HttpGet]
@@ -36,26 +32,26 @@ namespace productquery.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("sample")]
-        public async Task<IActionResult> SampleApi()
-        {
-            try
-            {
-                //var endpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/order-created"));
-                //await endpoint.Send<OrderCreatedEvent>(new 
-                //{
-                //    Id = Guid.NewGuid()
-                //});
-                await _orderCreatedService.PublishThroughEventBus(new OrderCreatedEvent { Id = Guid.NewGuid() });
+        //[HttpGet]
+        //[Route("sample")]
+        //public async Task<IActionResult> SampleApi()
+        //{
+        //    try
+        //    {
+        //        //var endpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/order-created"));
+        //        //await endpoint.Send<OrderCreatedEvent>(new 
+        //        //{
+        //        //    Id = Guid.NewGuid()
+        //        //});
+        //        await _orderCreatedService.PublishThroughEventBus(new OrderCreatedEvent { Id = Guid.NewGuid() });
 
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
