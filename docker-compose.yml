@@ -1,0 +1,46 @@
+version: '3'
+services :
+    usermanagement-query:
+        build: 
+            context: ./
+            dockerfile: ./usermanagementquery/Dockerfile
+        ports: 
+            - "44349:80"
+        image: usermanagement-query
+        container_name: usermanagement-query
+
+    restaurants-query:
+        build: 
+            context: ./
+            dockerfile: ./restaurantsquery/Dockerfile
+        ports: 
+            - "44339:80"
+        image: restaurants-query
+        container_name: restaurants-query
+    
+    product-query:
+        build: 
+            context: ./
+            dockerfile: ./productquery/Dockerfile
+        ports: 
+            - "44310:80"
+        image: product-query
+        container_name: product-query
+
+    orders-command:
+        build: 
+            context: ./
+            dockerfile: ./orderscommand/Dockerfile
+        ports: 
+            - "44337:80"
+        image: orders-command
+        container_name: orders-command
+            
+    orderpaymentprocessing-command:
+        build: 
+            context: ./
+            dockerfile: ./orderPaymentProcessingCommand/Dockerfile
+        ports: 
+            - "44364:80"
+        image: orderpaymentprocessing-command
+        container_name: orderpaymentprocessing-command
