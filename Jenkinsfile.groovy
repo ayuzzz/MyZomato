@@ -16,7 +16,7 @@ node {
             usermanagementQueryImage.push()       
             restaurantsQueryImage.push()
             productQueryImage.push()
-            customImordersCommandImageage.push()
+            ordersCommandImage.push()
             orderpaymentprocessingCommandImage.push()
         }
     }
