@@ -16,16 +16,16 @@ node {
             usermanagementQueryImage.push()       
             restaurantsQueryImage.push()
             productQueryImage.push()
-            ordersCommandImage.push()
+            customImordersCommandImageage.push()
             orderpaymentprocessingCommandImage.push()
         }
     }
 
     stage('Run containers'){
-        sh "docker run -dp 44349:80 ayuzzz1995/myzomato-usermanagement-query"
-        sh "docker run -dp 44339:80 ayuzzz1995/myzomato-restaurants-query"
-        sh "docker run -dp 44310:80 ayuzzz1995/myzomato-product-query"
-        sh "docker run -dp 44337:80 ayuzzz1995/myzomato-orders-command"
-        sh "docker run -dp 44364:80 ayuzzz1995/myzomato-orderpaymentprocessing-command"
+        bat "docker run -dp 44349:80 ayuzzz1995/myzomato-usermanagement-query"
+        bat "docker run -dp 44339:80 ayuzzz1995/myzomato-restaurants-query"
+        bat "docker run -dp 44310:80 ayuzzz1995/myzomato-product-query"
+        bat "docker run -dp 44337:80 ayuzzz1995/myzomato-orders-command"
+        bat "docker run -dp 44364:80 ayuzzz1995/myzomato-orderpaymentprocessing-command"
     }
 }
