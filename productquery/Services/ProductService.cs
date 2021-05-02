@@ -1,6 +1,7 @@
 ﻿using CommonModels;
 using productquery.Repositories.Abstractions;
 using productquery.Services.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,17 +17,24 @@ namespace productquery.Services
             _productRepository = productRepository;
         }
 
-        public async Task<List<Product>> GetAllProductsForRestaurantyAsync(int restaurantId = 0)
+        public async Task<List<Product>> GetAllProductsForRestaurantsAsync(int restaurantId = 0)
         {
-            List<Product> allProducts = await _productRepository.GetAllProductsAsync();
-            
-            if(restaurantId == 0)
+            try
             {
-                return allProducts.ToList();
+                List<Product> allProducts = await _productRepository.GetAllProductsAsync();
+
+                if (restaurantId == 0)
+                {
+                    return allProducts.ToList();
+                }
+                else
+                {
+                    return allProducts.Where(product => product.RestaurantId == restaurantId).ToList();
+                }
             }
-            else
+            catch(Exception)
             {
-                return allProducts.Where(product => product.RestaurantId == restaurantId).ToList();
+                return null;
             }
         }
     }

@@ -14,14 +14,18 @@ namespace productquery.Controllers
     public class ProductController : ControllerBase
     {
         private IProductService _productService;
-        private readonly IBusControl _bus;
-        private readonly IOrderCreatedService _orderCreatedService;
 
-        public ProductController(IProductService productService, IBusControl bus, IOrderCreatedService orderCreatedService)
+        /* ----------------- For Debugging purposes only ------------------*/
+        //private readonly IBusControl _bus;
+        //private readonly IOrderCreatedService _orderCreatedService;
+
+        public ProductController(IProductService productService)
         {
             _productService = productService;
-            _bus = bus;
-            _orderCreatedService = orderCreatedService;
+
+            /* ----------------- For Debugging purposes only ------------------*/
+            //_bus = bus;
+            //_orderCreatedService = orderCreatedService;
         }
 
         [HttpGet]
@@ -32,30 +36,31 @@ namespace productquery.Controllers
                 return BadRequest("Invalid restaurant Id");
             else
             {
-                return Ok(await _productService.GetAllProductsForRestaurantyAsync(restaurantId));
+                return Ok(await _productService.GetAllProductsForRestaurantsAsync(restaurantId));
             }
         }
 
-        [HttpGet]
-        [Route("sample")]
-        public async Task<IActionResult> SampleApi()
-        {
-            try
-            {
-                //var endpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/order-created"));
-                //await endpoint.Send<OrderCreatedEvent>(new 
-                //{
-                //    Id = Guid.NewGuid()
-                //});
-                await _orderCreatedService.PublishThroughEventBus(new OrderCreatedEvent { Id = Guid.NewGuid() });
+        /* ----------------- For Debugging purposes only ------------------*/
+        //[HttpGet]
+        //[Route("sample")]
+        //public async Task<IActionResult> SampleApi()
+        //{
+        //    try
+        //    {
+        //        //var endpoint = await _bus.GetSendEndpoint(new Uri("rabbitmq://localhost/order-created"));
+        //        //await endpoint.Send<OrderCreatedEvent>(new 
+        //        //{
+        //        //    Id = Guid.NewGuid()
+        //        //});
+        //        await _orderCreatedService.PublishThroughEventBus(new OrderCreatedEvent { Id = Guid.NewGuid() });
 
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
