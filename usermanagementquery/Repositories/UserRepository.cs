@@ -19,9 +19,16 @@ namespace usermanagementquery.Repositories
 
         public async Task<List<UserDetails>> GetUserDetails()
         {
-            IEnumerable<UserDetails> userDetails = await _sqlRepository.QueryAsync<UserDetails>(SqlQueries.GetUserDetails, commandTimeOut:300);
+            try
+            {
+                IEnumerable<UserDetails> userDetails = await _sqlRepository.QueryAsync<UserDetails>(SqlQueries.GetUserDetails, commandTimeOut: 300);
 
-            return userDetails.ToList();
+                return userDetails.ToList();
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
     }
 }

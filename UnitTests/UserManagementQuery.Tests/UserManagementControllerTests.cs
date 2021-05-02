@@ -1,6 +1,8 @@
+using CommonModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using usermanagementquery.Controllers;
@@ -28,9 +30,17 @@ namespace UserManagementQuery.Tests
         [Fact]
         public async Task ToValidate_GetUserDetails_InvalidInputsAsync()
         {
-            int userId = 1;
+            int userId = -1;
             var response = await controller.GetUserDetails(userId);
             Assert.IsType<BadRequestObjectResult>(response);
+        }
+
+        [Fact]
+        public async Task ToValidate_GetUserDetails_ValidInputsOutputsAsync()
+        {
+            int userId = 10;
+            var response = await controller.GetUserDetails(userId);
+            Assert.IsType<OkObjectResult>(response);
         }
     }
 }

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\usermanagementquery.csproj" />
+    <ProjectReference Include="..\..\usermanagementquery\usermanagementquery.csproj" />
   </ItemGroup>
 
 </Project>
