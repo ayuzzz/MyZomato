@@ -19,14 +19,21 @@ namespace restaurantsquery.Services
 
         public async Task<List<City>> GetCityDetailsAsync(int cityId)
         {
-            if(cityId == 0)
+            try
             {
-                return await _locationRepository.GetCityDetailsAsync();
+                if (cityId == 0)
+                {
+                    return await _locationRepository.GetCityDetailsAsync();
+                }
+                else
+                {
+                    List<City> cityList = await _locationRepository.GetCityDetailsAsync();
+                    return cityList.Where(city => city.Id == cityId).ToList();
+                }
             }
-            else
+            catch(Exception)
             {
-                List<City> cityList = await _locationRepository.GetCityDetailsAsync();
-                return cityList.Where(city => city.Id == cityId).ToList();
+                return null;
             }
         }
     }
