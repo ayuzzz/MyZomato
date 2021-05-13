@@ -1,0 +1,14 @@
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\BaseInjectionUtilities.deps.json
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\BaseInjectionUtilities.dll
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\BaseInjectionUtilities.pdb
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\CommonModels.dll
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\CommonUtilities.dll
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\CommonModels.pdb
+D:\MyZomat-Test\BaseInjectionUtilities\bin\Debug\netcoreapp3.1\CommonUtilities.pdb
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.csprojAssemblyReference.cache
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.csproj.CoreCompileInputs.cache
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.AssemblyInfoInputs.cache
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.AssemblyInfo.cs
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.csproj.CopyComplete
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.dll
+D:\MyZomat-Test\BaseInjectionUtilities\obj\Debug\netcoreapp3.1\BaseInjectionUtilities.pdb

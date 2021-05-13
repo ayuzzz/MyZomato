@@ -1,0 +1,9 @@
+D:\MyZomat-Test\CommonModels\bin\Debug\netcoreapp3.1\CommonModels.deps.json
+D:\MyZomat-Test\CommonModels\bin\Debug\netcoreapp3.1\CommonModels.dll
+D:\MyZomat-Test\CommonModels\bin\Debug\netcoreapp3.1\CommonModels.pdb
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.csproj.CoreCompileInputs.cache
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.AssemblyInfoInputs.cache
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.AssemblyInfo.cs
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.dll
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.pdb
+D:\MyZomat-Test\CommonModels\obj\Debug\netcoreapp3.1\CommonModels.csprojAssemblyReference.cache
