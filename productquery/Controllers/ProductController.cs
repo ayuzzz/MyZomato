@@ -15,9 +15,17 @@ namespace productquery.Controllers
     {
         private IProductService _productService;
 
+        /* ----------------- For Debugging purposes only ------------------*/
+        //private readonly IBusControl _bus;
+        //private readonly IOrderCreatedService _orderCreatedService;
+
         public ProductController(IProductService productService)
         {
             _productService = productService;
+
+            /* ----------------- For Debugging purposes only ------------------*/
+            //_bus = bus;
+            //_orderCreatedService = orderCreatedService;
         }
 
         [HttpGet]
@@ -28,10 +36,11 @@ namespace productquery.Controllers
                 return BadRequest("Invalid restaurant Id");
             else
             {
-                return Ok(await _productService.GetAllProductsForRestaurantyAsync(restaurantId));
+                return Ok(await _productService.GetAllProductsForRestaurantsAsync(restaurantId));
             }
         }
 
+        /* ----------------- For Debugging purposes only ------------------*/
         //[HttpGet]
         //[Route("sample")]
         //public async Task<IActionResult> SampleApi()

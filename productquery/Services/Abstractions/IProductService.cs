@@ -8,6 +8,6 @@ namespace productquery.Services.Abstractions
 {
     public interface IProductService
     {
-        Task<List<Product>> GetAllProductsForRestaurantyAsync(int restaurantId = 0);
+        Task<List<Product>> GetAllProductsForRestaurantsAsync(int restaurantId = 0);
     }
 }

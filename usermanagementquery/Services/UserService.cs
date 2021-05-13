@@ -1,4 +1,5 @@
-﻿using CommonModels;
+﻿using Automatonymous.Behaviors;
+using CommonModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,19 +20,26 @@ namespace usermanagementquery.Services
 
         public async Task<List<UserDetails>> GetUserDetailsAsync(int userId)
         {
-            List<UserDetails> userDetails = await _userRepository.GetUserDetails();
-            List<UserDetails> userDetailsList = new List<UserDetails>();
-
-            if(userId == 0)
+            try
             {
-                userDetailsList = userDetails;
-            }
-            else
-            {
-                userDetailsList = userDetails.Where(u => u.UserId == userId).ToList();
-            }
+                List<UserDetails> userDetails = await _userRepository.GetUserDetails();
+                List<UserDetails> userDetailsList = new List<UserDetails>();
 
-            return userDetailsList;
+                if (userId == 0)
+                {
+                    userDetailsList = userDetails;
+                }
+                else
+                {
+                    userDetailsList = userDetails.Where(u => u.UserId == userId).ToList();
+                }
+
+                return userDetailsList;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonModels", "..\CommonMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseInjectionUtilities", "..\BaseInjectionUtilities\BaseInjectionUtilities.csproj", "{3C1690EB-89A2-46E1-B7E9-49B97218C27E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantsQuery.Tests", "..\UnitTests\RestaurantsQuery.Tests\RestaurantsQuery.Tests.csproj", "{25931634-FE77-4901-901B-E75AAB73C860}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3C1690EB-89A2-46E1-B7E9-49B97218C27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C1690EB-89A2-46E1-B7E9-49B97218C27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C1690EB-89A2-46E1-B7E9-49B97218C27E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25931634-FE77-4901-901B-E75AAB73C860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25931634-FE77-4901-901B-E75AAB73C860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25931634-FE77-4901-901B-E75AAB73C860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25931634-FE77-4901-901B-E75AAB73C860}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
