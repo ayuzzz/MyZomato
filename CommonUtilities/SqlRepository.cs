@@ -15,7 +15,7 @@ namespace CommonUtilities
     {
         private readonly IConfiguration _configuration;
         private string _connectionstring = "";
-        private readonly string _server = @"192.168.1.8\AYUZZZSQLSERVER,1433";
+        private readonly string _server = @"192.168.1.7\AYUZZZSQLSERVER,1433";
         private readonly string _database = @"myzomato-dev-01";
         private readonly string _username = @"admin";
         private readonly string _password = @"root@123";
