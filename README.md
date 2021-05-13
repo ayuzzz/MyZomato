@@ -57,6 +57,8 @@ Restaurants List
 - It shows the list of restaurants available in the selected city and some basic details about those restaurants
 - The user can select anyone of these restaurants for the purpose of ordering the food.
 
+![Restaurants List](https://user-images.githubusercontent.com/29431398/118089570-22a4ae80-b3e6-11eb-8fb9-2c39ddcaab0a.png)
+
 Product list
 ------------
 - Upon selecting a restaurant from the Restaurants list, the user will be able to select the food items and their quantity from this screen.
