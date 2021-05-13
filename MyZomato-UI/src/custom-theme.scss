@@ -1,0 +1,40 @@
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+/* LIGHT THEME */
+$MyZomato-UI-primary: mat-palette($mat-teal);
+$MyZomato-UI-accent: mat-palette($mat-pink);
+$MyZomato-UI-warn: mat-palette($mat-red);
+
+$MyZomato-UI-theme: mat-light-theme((
+  color: (
+    primary: $MyZomato-UI-primary,
+    accent: $MyZomato-UI-accent,
+    warn: $MyZomato-UI-warn,
+  )
+));
+
+/* DARK THEME */
+$MyZomato-UI-dark-primary: mat-palette($mat-orange);
+$MyZomato-UI-dark-accent: mat-palette($mat-green);
+$MyZomato-UI-dark-warn: mat-palette($mat-red);
+
+$MyZomato-UI-dark-theme: mat-dark-theme((
+  color: (
+    primary: $MyZomato-UI-dark-primary,
+    accent: $MyZomato-UI-dark-accent,
+    warn: $MyZomato-UI-dark-warn,
+  )
+));
+
+.light-theme{
+  @include angular-material-theme($MyZomato-UI-theme);
+}
+
+.dark-theme{
+  @include angular-material-theme($MyZomato-UI-dark-theme);
+}
+
+@include angular-material-theme($MyZomato-UI-dark-theme);

@@ -1,0 +1,14 @@
+.quantity-container{
+    float:right;
+    margin:auto 0;
+}
+
+.plus .minus{
+    width: min-content;
+}
+
+.quantity{
+    border:none;
+    text-decoration: none;
+    width: min-content;
+}

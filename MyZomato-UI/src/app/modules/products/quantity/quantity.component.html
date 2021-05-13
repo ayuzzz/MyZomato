@@ -1,0 +1,9 @@
+<div class="quantity-container">
+    <button mat-raised-button aria-label="minus" (click)="decrement()">
+      <mat-icon>exposure_neg_1</mat-icon>
+    </button>
+    <button mat-button class="quantity">{{this.productQuantity}}</button>
+    <button mat-raised-button aria-label="plus" (click)="increment()">
+        <mat-icon>exposure_plus_1</mat-icon>
+    </button>
+</div>

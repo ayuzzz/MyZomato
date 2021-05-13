@@ -1,0 +1,47 @@
+.table-container{
+    height: 100%;
+    display: flex;
+}
+
+.checkout{
+    display: flex;
+    flex-direction: column;
+    margin: auto auto;
+    width: 100%;
+}
+
+tr th{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    font-weight:900;
+    font-size:small;
+    background-color:teal;
+    color: whitesmoke;
+}
+
+tr td{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    width: fit-content;
+}
+
+.footer-text{
+    font-weight:900;
+    font-size:small;
+}
+
+table{
+    vertical-align:middle;
+    margin: auto auto;
+    width: 40%;
+}
+
+app-success-dialog{
+    width: 20%;
+    align-self: center;
+    vertical-align:middle;
+    margin-top:2%;
+}
+
