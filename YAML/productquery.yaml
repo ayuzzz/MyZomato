@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productquery-deployment
+  labels:
+    app: productquery
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: productquery
+  template:
+    metadata:
+      labels:
+        app: productquery
+    spec:
+      containers:
+      - name: productquery-container
+        image: ayuzzz1995/myzomato-product-query
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: productquery-service
+spec:
+  selector:
+    app: productquery
+  type : LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000

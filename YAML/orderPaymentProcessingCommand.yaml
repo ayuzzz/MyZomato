@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderPaymentProcessingCommand-deployment
+  labels:
+    app: orderPaymentProcessingCommand
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: orderPaymentProcessingCommand
+  template:
+    metadata:
+      labels:
+        app: orderPaymentProcessingCommand
+    spec:
+      containers:
+      - name: orderPaymentProcessingCommand-container
+        image: ayuzzz1995/myzomato-orderpaymentprocessing-command
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderPaymentProcessingCommand-service
+spec:
+  selector:
+    app: orderPaymentProcessingCommand
+  type : LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000

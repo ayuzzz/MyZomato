@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderscommand-deployment
+  labels:
+    app: orderscommand
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: orderscommand
+  template:
+    metadata:
+      labels:
+        app: orderscommand
+    spec:
+      containers:
+      - name: orderscommand-container
+        image: ayuzzz1995/myzomato-orders-command
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderscommand-service
+spec:
+  selector:
+    app: orderscommand
+  type : LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
