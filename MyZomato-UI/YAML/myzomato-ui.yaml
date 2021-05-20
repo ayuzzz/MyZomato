@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myzomato-ui-deployment
+  labels:
+    app: myzomato-ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myzomato-ui
+  template:
+    metadata:
+      labels:
+        app: myzomato-ui
+    spec:
+      containers:
+      - name: myzomato-ui-container
+        image: myzomato-ui
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myzomato-ui-service
+spec:
+  selector:
+    app: myzomato-ui
+  type : LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
