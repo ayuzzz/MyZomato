@@ -1,4 +1,4 @@
-This is a food ordering application which has been created for learning purposes only.
+This is a very basic food ordering application which has been created for learning purposes only.
 
 It is based on the containerized Microservice Architecture with CQRS implementation.
 
@@ -36,6 +36,8 @@ Branch info
 main -> this is the combined frontend-backend branch
 myzomato-backend-master -> this is the master branch for the backend
 myzomato-ui-master -> this is the master branch for the frontend
+kubernetes-backend-master -> this branch is the master branch for kubernetes cluster related resources ("YAML" folder, "Helm Charts" folder)
+[Simple yaml files for K8 cluster present in YAML folder whereas Helm deployment related files present in "Helm Charts" folder]
 
 
 The main branch includes :
