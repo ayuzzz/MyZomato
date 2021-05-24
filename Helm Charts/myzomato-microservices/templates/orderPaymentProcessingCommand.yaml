@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploymentnames.orderPaymentProcessingCommand }}
+  labels:
+    app: orderpaymentprocessingcommand
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: orderpaymentprocessingcommand
+  template:
+    metadata:
+      labels:
+        app: orderpaymentprocessingcommand
+    spec:
+      containers:
+        - name: {{  .Values.containernames.orderPaymentProcessingCommand }}
+          image: {{ .Values.image.baseurl}}-{{ .Values.images.orderPaymentProcessingCommand}}
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.servicenames.orderPaymentProcessingCommand.name}}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: {{ .Values.servicenames.orderPaymentProcessingCommand.loadBalancerPort}}
+  selector:
+    app: orderpaymentprocessingcommand

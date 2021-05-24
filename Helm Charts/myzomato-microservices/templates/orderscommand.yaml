@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploymentnames.orderscommand }}
+  labels:
+    app: orderscommand
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: orderscommand
+  template:
+    metadata:
+      labels:
+        app: orderscommand
+    spec:
+      containers:
+        - name: {{ .Values.containernames.orderscommand }}
+          image: {{ .Values.image.baseurl}}-{{ .Values.images.orderscommand}}
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.servicenames.orderscommand.name}}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: {{ .Values.servicenames.orderscommand.loadBalancerPort}}
+  selector:
+    app: orderscommand
