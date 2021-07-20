@@ -18,7 +18,11 @@ steps:
 - script: |
     npm install -g @angular/cli
     cd ./MyZomato-UI
-    ls -a
     npm install
     ng build --prod
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'myzomato-artifacts'
+    publishLocation: 'Container'
   displayName: 'npm install and build'
