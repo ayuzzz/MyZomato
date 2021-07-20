@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- myzomato-ui-master
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -17,7 +17,7 @@ steps:
 
 - script: |
     npm install -g @angular/cli
+    cd /MyZomato-UI
     npm install
-    cd ./MyZomato-UI
     ng build --prod
   displayName: 'npm install and build'
