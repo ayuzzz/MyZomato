@@ -17,7 +17,7 @@ steps:
 
 - script: |
     npm install -g @angular/cli
-    cd /MyZomato-UI
+    ls -a
     npm install
     ng build --prod
   displayName: 'npm install and build'
